@@ -1,5 +1,5 @@
 ---
-title: CentOS6.8安装Tomcat7
+title: Linux丨CentOS6.8安装Tomcat7
 date: 2019-02-18 16:39:52
 categories: "Linux"
 tags: 

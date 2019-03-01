@@ -1,5 +1,5 @@
 ---
-title: CentOS6.8安装MySQL5.6
+title: Linux丨CentOS6.8安装MySQL5-6
 date: 2019-02-18 16:37:37
 categories: "Linux"
 tags: 

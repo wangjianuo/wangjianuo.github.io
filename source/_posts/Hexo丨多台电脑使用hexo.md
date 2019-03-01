@@ -1,7 +1,7 @@
 ---
-title: 多台电脑使用hexo
+title: Hexo丨多台电脑使用hexo
 date: 2019-02-18 16:26:43
-categories: "hexo"
+categories: "Hexo"
 tags: 
   - hexo
 ---

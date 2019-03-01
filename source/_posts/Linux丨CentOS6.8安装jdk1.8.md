@@ -1,5 +1,5 @@
 ---
-title: CentOS6.8安装jdk1.8
+title: Linux丨CentOS6.8安装jdk1.8
 date: 2019-02-18 16:32:51
 categories: "Linux"
 tags: 

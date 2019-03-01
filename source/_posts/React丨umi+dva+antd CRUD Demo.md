@@ -84,11 +84,9 @@ yarn
 ```
 
 
-- 启动本地开发环境
-
-
+启动本地开发环境
 ```
-通过 yarn start 启动本地开发
+yarn start
 ```
 如果顺利，在浏览器中输入`localhost:8000`，可以看到下面的页面。
 ![image](https://gw.alipayobjects.com/zos/rmsportal/YIFycZRnWWeXBGnSoFoT.png)
