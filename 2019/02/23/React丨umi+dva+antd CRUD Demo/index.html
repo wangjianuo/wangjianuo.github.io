@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="React,Antd,Umi,Dva,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="开始之前 node 8.4或以上版本 用cnpm或yarn管理包依赖  安装umi1yarn global add umi 创建umi项目1yarn create umi 选择app123456? Select the boilerplate type (Use arrow keys)  ant-design-pro  - Create project with an layout-only an">
+<meta name="keywords" content="React,Antd,Umi,Dva">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React丨umi+dva+antd CRUD Demo">
+<meta property="og:url" content="http://yoursite.com/2019/02/23/React丨umi+dva+antd CRUD Demo/index.html">
+<meta property="og:site_name" content="Wx&#39;s Blog">
+<meta property="og:description" content="开始之前 node 8.4或以上版本 用cnpm或yarn管理包依赖  安装umi1yarn global add umi 创建umi项目1yarn create umi 选择app123456? Select the boilerplate type (Use arrow keys)  ant-design-pro  - Create project with an layout-only an">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://gw.alipayobjects.com/zos/rmsportal/YIFycZRnWWeXBGnSoFoT.png">
+<meta property="og:image" content="https://camo.githubusercontent.com/2f75960f18fed0f5b5b705e323df8e380138b3b1/68747470733a2f2f7a6f732e616c697061796f626a656374732e636f6d2f726d73706f7274616c2f6763456c70527054446b7055456d72585247486e2e706e67">
+<meta property="og:updated_time" content="2019-02-23T04:29:32.439Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React丨umi+dva+antd CRUD Demo">
+<meta name="twitter:description" content="开始之前 node 8.4或以上版本 用cnpm或yarn管理包依赖  安装umi1yarn global add umi 创建umi项目1yarn create umi 选择app123456? Select the boilerplate type (Use arrow keys)  ant-design-pro  - Create project with an layout-only an">
+<meta name="twitter:image" content="https://gw.alipayobjects.com/zos/rmsportal/YIFycZRnWWeXBGnSoFoT.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/23/React丨umi+dva+antd CRUD Demo/">
+
+
+
+
+
+  <title>React丨umi+dva+antd CRUD Demo | Wx's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Wx's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/23/React丨umi+dva+antd CRUD Demo/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="W.x.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React丨umi+dva+antd CRUD Demo</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-23T12:19:43+08:00">
+                2019-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h3><ul>
+<li><code>node 8.4</code>或以上版本</li>
+<li>用<code>cnpm</code>或<code>yarn</code>管理包依赖</li>
+</ul>
+<h3 id="安装umi"><a href="#安装umi" class="headerlink" title="安装umi"></a>安装<code>umi</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add umi</span><br></pre></td></tr></table></figure>
+<h3 id="创建umi项目"><a href="#创建umi项目" class="headerlink" title="创建umi项目"></a>创建<code>umi</code>项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn create umi</span><br></pre></td></tr></table></figure>
+<p>选择app<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">? Select the boilerplate type (Use arrow keys)</span><br><span class="line">  ant-design-pro  - Create project with an layout-only ant-design-pro boilerplate, use together with umi block.</span><br><span class="line">❯ app             - Create project with a simple boilerplate, support typescript.</span><br><span class="line">  block           - Create a umi block.</span><br><span class="line">  library         - Create a library with umi.</span><br><span class="line">  plugin          - Create a umi plugin.</span><br></pre></td></tr></table></figure></p>
+<p>是否选择<code>TS</code>?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">? Do you want to use typescript? (y/N)</span><br><span class="line">N</span><br></pre></td></tr></table></figure></p>
+<p>希望启动什么功能?<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">? What functionality do you want to enable?</span><br><span class="line"> (*) antd</span><br><span class="line">&gt;(*) dva</span><br><span class="line"> ( ) code splitting</span><br><span class="line"> ( ) dll</span><br></pre></td></tr></table></figure></p>
+<p>根据上述选择，生成文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">   create package.json</span><br><span class="line">   create .gitignore</span><br><span class="line">   create .editorconfig</span><br><span class="line">   create .env</span><br><span class="line">   create .eslintrc</span><br><span class="line">   create .prettierignore</span><br><span class="line">   create .prettierrc</span><br><span class="line">   create .umirc.js</span><br><span class="line">   create mock\.gitkeep</span><br><span class="line">   create src\app.js</span><br><span class="line">   create src\assets\yay.jpg</span><br><span class="line">   create src\global.css</span><br><span class="line">   create src\layouts\__tests__\index.test.js</span><br><span class="line">   create src\layouts\index.css</span><br><span class="line">   create src\layouts\index.js</span><br><span class="line">   create src\models\.gitkeep</span><br><span class="line">   create src\pages\__tests__\index.test.js</span><br><span class="line">   create src\pages\index.css</span><br><span class="line">   create src\pages\index.js</span><br><span class="line">   create tslint.yml</span><br><span class="line">   create webpack.config.js</span><br><span class="line">✨  File Generate Done</span><br><span class="line">Done in 276.11s.</span><br></pre></td></tr></table></figure></p>
+<p>安装依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn</span><br></pre></td></tr></table></figure></p>
+<p>启动本地开发环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn start</span><br></pre></td></tr></table></figure></p>
+<p>如果顺利，在浏览器中输入<code>localhost:8000</code>，可以看到下面的页面。<br><img src="https://gw.alipayobjects.com/zos/rmsportal/YIFycZRnWWeXBGnSoFoT.png" alt="image"></p>
+<h3 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h3><ul>
+<li>编辑<code>.umirc.js</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 配置代理，能通过Restful方式访问</span><br><span class="line">&quot;proxy&quot;: &#123;</span><br><span class="line">    &quot;/api&quot;: &#123;</span><br><span class="line">        &quot;target&quot;: &quot;http://jsonplaceholder.typicode.com/&quot;,</span><br><span class="line">        &quot;changeOrigin&quot;: true,</span><br><span class="line">        &quot;pathRewrite&quot;: &#123; &quot;^/api&quot;: &quot;&quot; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>mock api eg: <a href="http://localhost:8000/api/users" target="_blank" rel="noopener">http://localhost:8000/api/users</a></p>
+<h3 id="生成users路由"><a href="#生成users路由" class="headerlink" title="生成users路由"></a>生成<code>users</code>路由</h3><p>umi 中文件即路由，所以我们要新增路由，新建文件即可!</p>
+<p>新增<code>src/pages/users/index.js</code>文件，命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ umi g page users/index</span><br><span class="line">   create src\pages\users\index.js</span><br><span class="line">   create src\pages\users\index.css</span><br><span class="line">√  success</span><br></pre></td></tr></table></figure></p>
+<p><code>src/pages/users/index.js</code>文件内容，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import styles from &apos;./index.css&apos;;</span><br><span class="line">export default function () &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div className=&#123;styles.normal&#125;&gt;</span><br><span class="line">      &lt;h1&gt;Page users index&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在浏览器中输入<code>http://localhost:8000/users</code>, 会看到<code>Page users index</code>的输出。</p>
+<h3 id="构造users-models和-service"><a href="#构造users-models和-service" class="headerlink" title="构造users models和 service"></a>构造<code>users models</code>和 <code>service</code></h3><p>新增 <code>src/pages/users/models/users.js</code>，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import * as usersService from &apos;../services/users&apos;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  namespace: &apos;users&apos;,</span><br><span class="line">  state: &#123;</span><br><span class="line">    list: [],</span><br><span class="line">    total: null,</span><br><span class="line">  &#125;,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    save(state, &#123; payload: &#123; data: list, total &#125; &#125;) &#123;</span><br><span class="line">      return &#123; ...state, list, total &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  effects: &#123;</span><br><span class="line">    *fetch(&#123; payload: &#123; page &#125; &#125;, &#123; call, put &#125;) &#123;</span><br><span class="line">      const &#123; data, headers &#125; = yield call(usersService.fetch, &#123; page &#125;);</span><br><span class="line">      yield put(&#123; type: &apos;save&apos;, payload: &#123; data, total: headers[&apos;x-total-count&apos;] &#125; &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  subscriptions: &#123;</span><br><span class="line">    setup(&#123; dispatch, history &#125;) &#123;</span><br><span class="line">      return history.listen((&#123; pathname, query &#125;) =&gt; &#123;</span><br><span class="line">        if (pathname === &apos;/users&apos;) &#123;</span><br><span class="line">          dispatch(&#123; type: &apos;fetch&apos;, payload: query &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>新增 <code>src/pages/users/services/users.js</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import request from &apos;../../../utils/request&apos;;</span><br><span class="line"></span><br><span class="line">export function fetch(&#123; page = 1 &#125;) &#123;</span><br><span class="line">  return request(`/api/users?_page=$&#123;page&#125;&amp;_limit=5`);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于我们需要从 response headers 中获取 total users 数量，所以需要改造下 <code>src/utils/request.js</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import fetch from &apos;dva/fetch&apos;;</span><br><span class="line"></span><br><span class="line">function checkStatus(response) &#123;</span><br><span class="line">  if (response.status &gt;= 200 &amp;&amp; response.status &lt; 300) &#123;</span><br><span class="line">    return response;</span><br><span class="line">  &#125;</span><br><span class="line">  const error = new Error(response.statusText);</span><br><span class="line">  error.response = response;</span><br><span class="line">  throw error;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Requests a URL, returning a promise.</span><br><span class="line"> *</span><br><span class="line"> * @param  &#123;string&#125; url       The URL we want to request</span><br><span class="line"> * @param  &#123;object&#125; [options] The options we want to pass to &quot;fetch&quot;</span><br><span class="line"> * @return &#123;object&#125;           An object containing either &quot;data&quot; or &quot;err&quot;</span><br><span class="line"> */</span><br><span class="line">export default async function request(url, options) &#123;</span><br><span class="line">  const response = await fetch(url, options);</span><br><span class="line">  checkStatus(response);</span><br><span class="line">  const data = await response.json();</span><br><span class="line">  const ret = &#123;</span><br><span class="line">    data,</span><br><span class="line">    headers: &#123;&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">  if (response.headers.get(&apos;x-total-count&apos;)) &#123;</span><br><span class="line">    ret.headers[&apos;x-total-count&apos;] = response.headers.get(&apos;x-total-count&apos;);</span><br><span class="line">  &#125;</span><br><span class="line">  return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再次访问<code>http://localhost:8000/users</code>页面的时候，观察一下<code>Network</code>, 应该是有<code>Request URL: http://localhost:8000/api/users?_page=1&amp;_limit=5</code>, 也有对应的<code>Response</code>返回值。说明API接口已经调通了，接来下就开始弄视图层了。</p>
+<h3 id="添加页面，展示users列表"><a href="#添加页面，展示users列表" class="headerlink" title="添加页面，展示users列表"></a>添加页面，展示<code>users</code>列表</h3><p>我们把组件存在 src/pages/users/components 里，所以在这里新建 Users.js 和 Users.css。具体参考这个 <a href="https://github.com/umijs/umi-dva-user-dashboard/commit/ee9ccba33736c31dd8271fabf925c58a9edf76d0" target="_blank" rel="noopener">Commit</a>。</p>
+<p>需留意两件事：</p>
+<ol>
+<li>对 model 进行了微调，加入了 page 表示当前页</li>
+<li>由于 components 和 services 中都用到了 pageSize，所以提取到 <code>src/constants.js</code></li>
+</ol>
+<p>改完后，切换到浏览器，应该能看到带分页的用户列表。<br><img src="https://camo.githubusercontent.com/2f75960f18fed0f5b5b705e323df8e380138b3b1/68747470733a2f2f7a6f732e616c697061796f626a656374732e636f6d2f726d73706f7274616c2f6763456c70527054446b7055456d72585247486e2e706e67" alt="image"></p>
+<h3 id="添加-layout"><a href="#添加-layout" class="headerlink" title="添加 layout"></a>添加 layout</h3><p>添加 layout 布局，使得我们可以在首页和用户列表页之间来回切换。umi 里约定 layouts/index.js 为全局路由，所以我们新增 <code>src/layouts/index.js</code> 和 CSS 文件即可。</p>
+<p>参考这个 <a href="https://github.com/umijs/umi-dva-user-dashboard/commit/2c763479762ed9fb16e151d362df2b8d68631cd0" target="_blank" rel="noopener">Commit</a>。</p>
+<p>注意：</p>
+<ol>
+<li>页头的菜单会随着页面切换变化，高亮显示当前页所在的菜单项</li>
+</ol>
+<h3 id="处理-loading-状态"><a href="#处理-loading-状态" class="headerlink" title="处理 loading 状态"></a>处理 loading 状态</h3><p>dva 有一个管理 effects 执行的 hook，并基于此封装了 dva-loading 插件。通过这个插件，我们可以不必一遍遍地写 showLoading 和 hideLoading，当发起请求时，插件会自动设置数据里的 loading 状态为 true 或 false 。然后我们在渲染 components 时绑定并根据这个数据进行渲染。</p>
+<p>umi-plugin-dva 默认内置了 dva-loading 插件。</p>
+<p>然后在 <code>src/components/Users/Users.js</code> 里绑定 loading 数据：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="addition">+ loading: state.loading.models.users,</span></span><br></pre></td></tr></table></figure>
+<p>具体参考这个 <a href="https://github.com/umijs/umi-dva-user-dashboard/commit/f81d36c639d35e67db8b2d0a65b561e4af203eb1" target="_blank" rel="noopener">Commit</a> 。</p>
+<p>刷新浏览器，你的用户列表有 loading 了没?</p>
+<h3 id="处理分页"><a href="#处理分页" class="headerlink" title="处理分页"></a>处理分页</h3><p>只改一个文件 <code>src/pages/users/components/Users.js</code> 就好。</p>
+<p>处理分页有两个思路：</p>
+<ol>
+<li>发 action，请求新的分页数据，保存到 model，然后自动更新页面</li>
+<li>切换路由 (由于之前监听了路由变化，所以后续的事情会自动处理)</li>
+</ol>
+<p>我们用的是思路 2 的方式，好处是用户可以直接访问到 page 2 或其他页面。</p>
+<p>参考这个 <a href="https://github.com/umijs/umi-dva-user-dashboard/commit/156220ce72e7d26e2823e8b98fbbd7e5c991db9b" target="_blank" rel="noopener">Commit</a> 。</p>
+<h3 id="删除功能"><a href="#删除功能" class="headerlink" title="删除功能"></a>删除功能</h3><ol>
+<li>service, 修改 <code>src/pages/users/services/users.js</code>：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">`/api/users/<span class="subst">$&#123;id&#125;</span>`</span>, &#123;</span><br><span class="line">    method: <span class="string">'DELETE'</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>model, 修改 <code>src/pages/users/models/users.js</code>：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*remove(&#123; <span class="attr">payload</span>: id &#125;, &#123; call, put, select &#125;) &#123;</span><br><span class="line">  <span class="keyword">yield</span> call(usersService.remove, id);</span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">yield</span> select(<span class="function"><span class="params">state</span> =&gt;</span> state.users.page);</span><br><span class="line">  <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'fetch'</span>, <span class="attr">payload</span>: &#123; page &#125; &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<ol>
+<li>component, 修改 <code>src/pages/users/components/Users.js</code>，替换 <code>deleteHandler</code> 内容：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dispatch(&#123;</span><br><span class="line">  type: <span class="string">'users/remove'</span>,</span><br><span class="line">  payload: id,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>切换到浏览器，删除功能应该已经生效。</p>
+<h3 id="编辑功能"><a href="#编辑功能" class="headerlink" title="编辑功能"></a>编辑功能</h3><p>处理用户编辑和前面的一样，遵循三步走：</p>
+<ol>
+<li>service</li>
+<li>model</li>
+<li>component</li>
+</ol>
+<p>先是 service，修改 <code>src/pages/users/services/users.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">patch</span>(<span class="params">id, values</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> request(<span class="string">`/api/users/<span class="subst">$&#123;id&#125;</span>`</span>, &#123;</span><br><span class="line">    method: <span class="string">'PATCH'</span>,</span><br><span class="line">    body: <span class="built_in">JSON</span>.stringify(values),</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再是 model，修改 <code>src/pages/users/models/users.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*patch(&#123; <span class="attr">payload</span>: &#123; id, values &#125; &#125;, &#123; call, put, select &#125;) &#123;</span><br><span class="line">  <span class="keyword">yield</span> call(usersService.patch, id, values);</span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">yield</span> select(<span class="function"><span class="params">state</span> =&gt;</span> state.users.page);</span><br><span class="line">  <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'fetch'</span>, <span class="attr">payload</span>: &#123; page &#125; &#125;);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>最后是 component，详见 <a href="https://github.com/umijs/umi-dva-user-dashboard/commit/6044e2fcaf53ce3645217194abe0fffa7585477c" target="_blank" rel="noopener">Commit</a>。</p>
+<p>需要注意的一点是，我们在这里如何处理 Modal 的 visible 状态，有几种选择：</p>
+<ol>
+<li>存 dva 的 model state 里</li>
+<li>存 component state 里</li>
+</ol>
+<p>另外，怎么存也是个问题，可以：</p>
+<ol>
+<li>只有一个 visible，然后根据用户点选的 user 填不同的表单数据</li>
+<li>几个 user 几个 visible</li>
+</ol>
+<p>此教程选的方案是 2-2，即存 component state，并且 visible 按 user 存。另外为了使用的简便，封装了一个 <code>UserModal</code> 的组件。</p>
+<p>完成后，切换到浏览器，应该就能对用户进行编辑了。</p>
+<h3 id="用户创建"><a href="#用户创建" class="headerlink" title="用户创建"></a>用户创建</h3><p>相比用户编辑，用户创建更简单些，因为可以共用 <code>UserModal</code> 组件。和编辑比较类似，详见 <a href="https://github.com/umijs/umi-dva-user-dashboard/commit/91708ca1e39234a4dc07aa7a7193d05358894329" target="_blank" rel="noopener">Commit</a> 。</p>
+<h3 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h3><p><a href="https://github.com/wangjianuo/umi-dva-crud-demo" target="_blank" rel="noopener">https://github.com/wangjianuo/umi-dva-crud-demo</a></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://umijs.org/zh/</span><br><span class="line">https://github.com/dvajs/dva</span><br><span class="line">https://github.com/sorrycc/blog/issues/62</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/Antd/" rel="tag"># Antd</a>
+          
+            <a href="/tags/Umi/" rel="tag"># Umi</a>
+          
+            <a href="/tags/Dva/" rel="tag"># Dva</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/18/Linux丨CentOS6.8安装Tomcat7/" rel="next" title="Linux丨CentOS6.8安装Tomcat7">
+                <i class="fa fa-chevron-left"></i> Linux丨CentOS6.8安装Tomcat7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/01/Nginx丨开启Gzip/" rel="prev" title="Nginx丨开启Gzip">
+                Nginx丨开启Gzip <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="W.x.">
+          <p class="site-author-name" itemprop="name">W.x.</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/wangjianuo/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始之前"><span class="nav-number">1.</span> <span class="nav-text">开始之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装umi"><span class="nav-number">2.</span> <span class="nav-text">安装umi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建umi项目"><span class="nav-number">3.</span> <span class="nav-text">创建umi项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置代理"><span class="nav-number">4.</span> <span class="nav-text">配置代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成users路由"><span class="nav-number">5.</span> <span class="nav-text">生成users路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造users-models和-service"><span class="nav-number">6.</span> <span class="nav-text">构造users models和 service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加页面，展示users列表"><span class="nav-number">7.</span> <span class="nav-text">添加页面，展示users列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加-layout"><span class="nav-number">8.</span> <span class="nav-text">添加 layout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理-loading-状态"><span class="nav-number">9.</span> <span class="nav-text">处理 loading 状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理分页"><span class="nav-number">10.</span> <span class="nav-text">处理分页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除功能"><span class="nav-number">11.</span> <span class="nav-text">删除功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑功能"><span class="nav-number">12.</span> <span class="nav-text">编辑功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户创建"><span class="nav-number">13.</span> <span class="nav-text">用户创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github"><span class="nav-number">14.</span> <span class="nav-text">Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">15.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">W.x.</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
