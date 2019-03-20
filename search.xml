@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[React丨第一季 第一集 Hello React]]></title>
-    <url>%2F2019%2F03%2F20%2FReact%E4%B8%A8%E7%AC%AC%E4%B8%80%E5%AD%A3%20%E7%AC%AC%E4%BA%8C%E9%9B%86%20JSX%2F</url>
-    <content type="text"><![CDATA[JSX语法JSX的由来React与其他JS模板语言不同之处，在于React是通过创建与更新虚拟元素来管理整个虚拟DOM。 虚拟元素：可以理解为真实元素的对应，它的构建与更新都是在内存中完成的，并不会真正渲染到DOM中去。 在React中创建的虚拟元素，可以分为两类：DOM元素（DOM element）和组件元素（component element），对应着原生的DOM元素和自定义元素。而JSX与创建元素的过程有莫大的关联。 DOM元素WEB页面从HTML转JSON对象。示例： HTML 123&lt;button class="btn btn-blue"&gt; &lt;em&gt;hello jsx&lt;/em&gt;&lt;/button&gt; JSON 123456789101112&#123; type: 'button', props: &#123; className: 'btn btn-blue', children: [&#123; type: 'em', props: &#123; children: 'hello jsx' &#125; &#125;] &#125;&#125; 这样就可以在JS中创建虚拟DOM了。 组件元素 封装button元素，构建按钮的公共方法：1234567891011121314const Button = (&#123;color, text&#125;) =&gt; &#123; return &#123; type: 'button', props: &#123; className: `btn btn-$&#123;color&#125;`, children: &#123; type: 'em', props: &#123; children: `$&#123;text&#125;` &#125; &#125; &#125; &#125;&#125; 当要生成DOM元素中具体的按钮时，就可以使用下面方式来创建：1Button(&#123;color: 'blue', text: 'hello jsx'&#125;) 上述构建Button的公共方法，也是作为元素而存在，方法名对应了DOM的元素类型，参数对应DOM元素的属性，这样它就具备了元素的两大必要条件，这样的有元素，就是自定义类型元素，或组件元素。用JSON描述它：1234567&#123; type: Button, props: &#123; color: 'blue', childre: 'hello jsx' &#125;&#125; 这也是React的核心思想之一。我们可以让元素彼此嵌套或混合。这些层层封装的组件元素，就是所有的React组件，最终我们可以用递归的方式构建出完全的DOM元素树。 如果是大量的表达式，就很难维护了。jsx语法就应运而生了。jsx是将html语法直接加入到js代码中，在通过翻译器转换到纯js后，有浏览器执行。在实际开发中，jsx在产品打包阶段都已经编译成纯js，不会带来任何副作用，反而回让代码更加直观并已于维护。 现在已全部采用Babel的jsx编译器实现。Babel作为专门为JS语法编译工具，达到了“一处配置，统一运行”的目的。 jsx 1234567cosnt DeleteAccount = () =&gt; &#123; &lt;div&gt; &lt;p&gt;Are you sure ?&lt;/p&gt; &lt;DangerButton&gt;Confirm&lt;/DangerButton&gt; &lt;Button color="bule"&gt;Cancel&lt;/Button&gt; &lt;/div&gt;&#125; 用Babel转移成React可以执行的代码 123456789101112131415161718192021var DeleteAccount = function DeleteAccout() &#123; return React.createElement( 'div', null, ReactElement( 'p', null, 'Are you sure ?' ), React.createElement( DangerButton, null, 'Confirm' ), React.createElement( Button, &#123;color: 'blue'&#125;, 'Cancel' ) )&#125; 上述，除了在创建元素使用了React.createElement创建之外，其他的和JSON的结构一样的。 jsx基本语法 xml基本语法 12定义标签时，只允许被一个标签包裹。标签一定要闭合。 元素类型 123456789-- 元素类型DOM元素：小写组件元素：大写-- 注释&#123;/* 哈哈哈 */&#125;-- DOCTYPEDOCTYPE头是一个非常特殊的标志，一般会在使用React作为服务端渲染时用到。在HTML中DOCTYPE是没有闭合,也就是说我们无法渲染它。 元素属性 12345678910111213141516171819class属性改为classNamefor属性改为htmlFor//-- 展开属性const component = &lt;Component name=&#123;name&#125; value=&#123;value&#125; /&gt;const data = &#123;name:'foo', value:'bar'&#125;const component = &lt;Component &#123;...data&#125; /&gt;// 反模式const component = &lt;Component /&gt;component.props.name = name;component.props.value = value;上面的写法，React不能帮你检查属性类型（propTypes），这样即使组件的属性类型有错误，不能得到清晰的错误提示//-- 自定义HTML属性组件的最终目的是输出虚拟DOM，也就是需要被渲染到界面的机构。其狠心渲染的方式，就是render方法。它是React组件生命周期的一部分，也是最核心的函数之一。 JS属性表达式 12345const person = &lt;Person name=&#123;window.isLoggedIn ? window.name: ''&#125; /&gt;const content = &lt;Container&gt; &#123;window.isLoggedIn ? &lt;Nav/&gt;: &lt;Login/&gt;&#125;&lt;/Container&gt; HTML转义 123React会将所有要显示的DOM的字符串转义，防止XSS。React提供了dangerousSetInnerHtml属性。它的作用是避免React转义字符，在确定必要的情况下可以使用它: &lt;div dangerouslySetInnerHtml=&#123;&#123;__html: 'cc &amp;copy; 2019'&#125;&#125; /&gt; React组件React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。 官方在React组件构建上提供了三种不同的方法： React.createClass ES6 Classes 无状态函数(stateless function) React.createClas这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是React官方唯一指定的组件写法。12345678910111213141516const Button = React.createClass(&#123; getDefaultProps() &#123; return &#123; color: 'blue', text: 'Confirm' &#125; &#125;, render()&#123; const &#123;color, text&#125; = this.props return ( &lt;button className=`&#123;btn btn-$&#123;color&#125;&#125;`&gt; &lt;em&gt;&#123;text&#125;&lt;/em&gt; &lt;/button&gt; ) &#125;&#125;) ES6 Classes123456789101112131415161718import React, &#123;Component&#125; from 'React'class Button extends Component &#123; constructor(props) &#123; super(props) &#125; static defaultProps = &#123; color: 'blue', text: 'Confirm' &#125; render()&#123; const &#123;color, text&#125; = this.props return ( &lt;button className=`&#123;btn btn-$&#123;color&#125;&#125;`&gt; &lt;em&gt;&#123;text&#125;&lt;/em&gt; &lt;/button&gt; ) &#125;&#125; 在React应用中，极少让子类去继承功能组件。试想在UI层面小的修改就会影响到整体交互或样式，牵一发而动全身，用继承来抽象往往是事倍功半。在React组件开发中，常用的方式将组件拆分到合理的粒度，用组合的方式合成业务组件。 无状态函数在0.14版本之后新增的，且官方推崇。1234567function Button(&#123;color='blue', text='Confirm'&#125;) &#123; return ( &lt;button className=&#123;`btn btn-$&#123;color&#125;`&#125;&gt; &lt;em&gt;&#123;text&#125;&lt;/em&gt; &lt;/button&gt; )&#125; 无状态组件，只传入props和context两个参数；它不存在state，也没有生命周期方法，render方法。不过像propTypes和defaultProps还是可以通过向方法设置静态属性来实现的。 在合适的情况下，都应该且必须使用无状态组件。无状态组件不像上述两种方法在调用的时会创建新实例，它创建时始终保持了一个实例，避免了不必要的检查和内存分配，做到了内部优化。]]></content>
+    <title><![CDATA[React丨第一季 第3集 React组件]]></title>
+    <url>%2F2019%2F03%2F20%2FReact%E4%B8%A8%E7%AC%AC%E4%B8%80%E5%AD%A3%20%E7%AC%AC3%E9%9B%86%20React%E7%BB%84%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[React组件React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。 官方在React组件构建上提供了三种不同的方法： React.createClass ES6 Classes 无状态函数(stateless function) React.createClas这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是React官方唯一指定的组件写法。12345678910111213141516const Button = React.createClass(&#123; getDefaultProps() &#123; return &#123; color: 'blue', text: 'Confirm' &#125; &#125;, render()&#123; const &#123;color, text&#125; = this.props return ( &lt;button className=`&#123;btn btn-$&#123;color&#125;&#125;`&gt; &lt;em&gt;&#123;text&#125;&lt;/em&gt; &lt;/button&gt; ) &#125;&#125;) ES6 Classes123456789101112131415161718import React, &#123;Component&#125; from 'React'class Button extends Component &#123; constructor(props) &#123; super(props) &#125; static defaultProps = &#123; color: 'blue', text: 'Confirm' &#125; render()&#123; const &#123;color, text&#125; = this.props return ( &lt;button className=`&#123;btn btn-$&#123;color&#125;&#125;`&gt; &lt;em&gt;&#123;text&#125;&lt;/em&gt; &lt;/button&gt; ) &#125;&#125; 在React应用中，极少让子类去继承功能组件。试想在UI层面小的修改就会影响到整体交互或样式，牵一发而动全身，用继承来抽象往往是事倍功半。在React组件开发中，常用的方式将组件拆分到合理的粒度，用组合的方式合成业务组件。 无状态函数在0.14版本之后新增的，且官方推崇。1234567function Button(&#123;color='blue', text='Confirm'&#125;) &#123; return ( &lt;button className=&#123;`btn btn-$&#123;color&#125;`&#125;&gt; &lt;em&gt;&#123;text&#125;&lt;/em&gt; &lt;/button&gt; )&#125; 无状态组件，只传入props和context两个参数；它不存在state，也没有生命周期方法，render方法。不过像propTypes和defaultProps还是可以通过向方法设置静态属性来实现的。 在合适的情况下，都应该且必须使用无状态组件。无状态组件不像上述两种方法在调用的时会创建新实例，它创建时始终保持了一个实例，避免了不必要的检查和内存分配，做到了内部优化。]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React丨第一季 第2集 JSX]]></title>
+    <url>%2F2019%2F03%2F20%2FReact%E4%B8%A8%E7%AC%AC%E4%B8%80%E5%AD%A3%20%E7%AC%AC2%E9%9B%86%20JSX%2F</url>
+    <content type="text"><![CDATA[JSX语法JSX的由来React与其他JS模板语言不同之处，在于React是通过创建与更新虚拟元素来管理整个虚拟DOM。 虚拟元素：可以理解为真实元素的对应，它的构建与更新都是在内存中完成的，并不会真正渲染到DOM中去。 在React中创建的虚拟元素，可以分为两类：DOM元素（DOM element）和组件元素（component element），对应着原生的DOM元素和自定义元素。而JSX与创建元素的过程有莫大的关联。 DOM元素WEB页面从HTML转JSON对象。示例： HTML 123&lt;button class="btn btn-blue"&gt; &lt;em&gt;hello jsx&lt;/em&gt;&lt;/button&gt; JSON 123456789101112&#123; type: 'button', props: &#123; className: 'btn btn-blue', children: [&#123; type: 'em', props: &#123; children: 'hello jsx' &#125; &#125;] &#125;&#125; 这样就可以在JS中创建虚拟DOM了。 组件元素 封装button元素，构建按钮的公共方法：1234567891011121314const Button = (&#123;color, text&#125;) =&gt; &#123; return &#123; type: 'button', props: &#123; className: `btn btn-$&#123;color&#125;`, children: &#123; type: 'em', props: &#123; children: `$&#123;text&#125;` &#125; &#125; &#125; &#125;&#125; 当要生成DOM元素中具体的按钮时，就可以使用下面方式来创建：1Button(&#123;color: 'blue', text: 'hello jsx'&#125;) 上述构建Button的公共方法，也是作为元素而存在，方法名对应了DOM的元素类型，参数对应DOM元素的属性，这样它就具备了元素的两大必要条件，这样的有元素，就是自定义类型元素，或组件元素。用JSON描述它：1234567&#123; type: Button, props: &#123; color: 'blue', childre: 'hello jsx' &#125;&#125; 这也是React的核心思想之一。我们可以让元素彼此嵌套或混合。这些层层封装的组件元素，就是所有的React组件，最终我们可以用递归的方式构建出完全的DOM元素树。 如果是大量的表达式，就很难维护了。jsx语法就应运而生了。jsx是将html语法直接加入到js代码中，在通过翻译器转换到纯js后，有浏览器执行。在实际开发中，jsx在产品打包阶段都已经编译成纯js，不会带来任何副作用，反而回让代码更加直观并已于维护。 现在已全部采用Babel的jsx编译器实现。Babel作为专门为JS语法编译工具，达到了“一处配置，统一运行”的目的。 jsx 1234567cosnt DeleteAccount = () =&gt; &#123; &lt;div&gt; &lt;p&gt;Are you sure ?&lt;/p&gt; &lt;DangerButton&gt;Confirm&lt;/DangerButton&gt; &lt;Button color="bule"&gt;Cancel&lt;/Button&gt; &lt;/div&gt;&#125; 用Babel转移成React可以执行的代码 123456789101112131415161718192021var DeleteAccount = function DeleteAccout() &#123; return React.createElement( 'div', null, ReactElement( 'p', null, 'Are you sure ?' ), React.createElement( DangerButton, null, 'Confirm' ), React.createElement( Button, &#123;color: 'blue'&#125;, 'Cancel' ) )&#125; 上述，除了在创建元素使用了React.createElement创建之外，其他的和JSON的结构一样的。 jsx基本语法 xml基本语法 12定义标签时，只允许被一个标签包裹。标签一定要闭合。 元素类型 123456789-- 元素类型DOM元素：小写组件元素：大写-- 注释&#123;/* 哈哈哈 */&#125;-- DOCTYPEDOCTYPE头是一个非常特殊的标志，一般会在使用React作为服务端渲染时用到。在HTML中DOCTYPE是没有闭合,也就是说我们无法渲染它。 元素属性 12345678910111213141516171819class属性改为classNamefor属性改为htmlFor//-- 展开属性const component = &lt;Component name=&#123;name&#125; value=&#123;value&#125; /&gt;const data = &#123;name:'foo', value:'bar'&#125;const component = &lt;Component &#123;...data&#125; /&gt;// 反模式const component = &lt;Component /&gt;component.props.name = name;component.props.value = value;上面的写法，React不能帮你检查属性类型（propTypes），这样即使组件的属性类型有错误，不能得到清晰的错误提示//-- 自定义HTML属性组件的最终目的是输出虚拟DOM，也就是需要被渲染到界面的机构。其狠心渲染的方式，就是render方法。它是React组件生命周期的一部分，也是最核心的函数之一。 JS属性表达式 12345const person = &lt;Person name=&#123;window.isLoggedIn ? window.name: ''&#125; /&gt;const content = &lt;Container&gt; &#123;window.isLoggedIn ? &lt;Nav/&gt;: &lt;Login/&gt;&#125;&lt;/Container&gt; HTML转义 123React会将所有要显示的DOM的字符串转义，防止XSS。React提供了dangerousSetInnerHtml属性。它的作用是避免React转义字符，在确定必要的情况下可以使用它: &lt;div dangerouslySetInnerHtml=&#123;&#123;__html: 'cc &amp;copy; 2019'&#125;&#125; /&gt;]]></content>
       <categories>
         <category>React</category>
       </categories>
@@ -13,7 +24,7 @@
   </entry>
   <entry>
     <title><![CDATA[React丨第一季 第一集 Hello React]]></title>
-    <url>%2F2019%2F03%2F18%2FReact%E4%B8%A8%E7%AC%AC%E4%B8%80%E5%AD%A3%20%E7%AC%AC%E4%B8%80%E9%9B%86%20Hello%20React%2F</url>
+    <url>%2F2019%2F03%2F18%2FReact%E4%B8%A8%E7%AC%AC%E4%B8%80%E5%AD%A3%20%E7%AC%AC1%E9%9B%86%20Hello%20React%2F</url>
     <content type="text"><![CDATA[初识ReactReact是FB在2013年开源在Github上的JavaScript库。 专注视图层React并不是完整的MVC/MVVM框架，它专注于视图层解决方案。对于复杂的应用，根据场景可搭配Redux来使用。 Virtual DOM真实页面对应一个DOM树。 传统页面开发，更新页面，都是手动操作DOM来更新。 在WEB前端中，性能消耗最大的就是DOM操作，而且这部分代码会很难维护。 React是把真实的DOM树转成Js对象树，也就是Virtual DOM。 每次数据更新后，重新计算Virtual DOM，和上一次做对比，对发生变化的部分，做批量更新。React有shouldComponentUpdate声明周期回调，来减少数据变化后不必要的对比过程，以保证性能。 3、函数式编程React把过去不断重复构建UI的过程抽成组件，在给定参数的情况下，约定渲染对应的UI界面。 React充分利用很多函数式方法去减少冗余代码。 函数式编程才是React的精髓。]]></content>
       <categories>
         <category>React</category>
@@ -145,18 +156,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Roadmap丨Web Front-end Dev in 2019]]></title>
-    <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8Web%20Front-end%20Dev%20in%202019%2F</url>
-    <content type="text"><![CDATA[Web Front-end React react-router redux antd antd-mobile dva umi SSR Next.js After.js Webpack code spliting dll Gulp Web Front-end Containerization docker k8s Vue vue-cli vue-router vuex SSR Nuxt.js ES6/ES7 Web Front-end Security Web Front-end Optimization Nginx GZip Package Managers npm 开发一个NPM模块 yarn CSS Box Model Grid Flex Media Querie CSS Pre-processors Less Sass PostCSS CSS Frameworks BootStrap Basics of TypeScript Basics of JavaScript 闭包 作用域 变量提升 XHR和Ajax发起HTTP请求 第三方模块 moment.js Node.js express koa2 WeChat 小程序 公众号 H5开发 浏览器差异 可视化 ECharts D3.js Canvas SVG WebGL RESTful Git 参考资料1https://github.com/kamranahmedse/developer-roadmap]]></content>
-      <categories>
-        <category>Roadmap</category>
-      </categories>
-      <tags>
-        <tag>Roadmap</tag>
-        <tag>WEB FRONTEND</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Roadmap丨JavaWeb Dev in 2019]]></title>
     <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8JavaWeb%20Dev%20in%202019%2F</url>
     <content type="text"><![CDATA[JAVA WEB基础原理 Java JDK8 JVM 线程 并发 秒杀 负载 WEB框架 Spring Springboot SpringCloud MyBaits JPA DB MySQL 服务器 Tomcat Nginx 高阶 ELK MQ ZK Netty Dubbo 工具 Maven Git 容器 Docker K8S 大数据 Hadoop HDFS MapReduce Hbase Pig Hive Spark Storm Linux setup mysql nginx tomcat jdk elk docker 基础命令]]></content>
@@ -166,6 +165,18 @@
       <tags>
         <tag>Roadmap</tag>
         <tag>JAVA WEB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Roadmap丨Web Front-end Dev in 2019]]></title>
+    <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8Web%20Front-end%20Dev%20in%202019%2F</url>
+    <content type="text"><![CDATA[Web Front-end React react-router redux antd antd-mobile dva umi SSR Next.js After.js Webpack code spliting dll Gulp Web Front-end Containerization docker k8s Vue vue-cli vue-router vuex SSR Nuxt.js ES6/ES7 Web Front-end Security Web Front-end Optimization Nginx GZip Package Managers npm 开发一个NPM模块 yarn CSS Box Model Grid Flex Media Querie CSS Pre-processors Less Sass PostCSS CSS Frameworks BootStrap Basics of TypeScript Basics of JavaScript 闭包 作用域 变量提升 XHR和Ajax发起HTTP请求 第三方模块 moment.js Node.js express koa2 WeChat 小程序 公众号 H5开发 浏览器差异 可视化 ECharts D3.js Canvas SVG WebGL RESTful Git 参考资料1https://github.com/kamranahmedse/developer-roadmap]]></content>
+      <categories>
+        <category>Roadmap</category>
+      </categories>
+      <tags>
+        <tag>Roadmap</tag>
+        <tag>WEB FRONTEND</tag>
       </tags>
   </entry>
 </search>
