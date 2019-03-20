@@ -1,40 +1,11 @@
 ---
-title: React丨Hello React 1
-date: 2019-03-18 11:38:04
+title: React丨第一季 第2集 JSX
+date: 2019-03-20 18:44:31
 categories: "React"
 tags: 
   - React
 ---
 
-
-# 初识React
-React是FB在2013年开源在Github上的JavaScript库。
-
-## 专注视图层
-React并不是完整的MVC/MVVM框架，它专注于视图层解决方案。对于复杂的应用，根据场景可搭配Redux来使用。
-
-## Virtual DOM
-真实页面对应一个DOM树。
-
-传统页面开发，更新页面，都是手动操作DOM来更新。
-
-[1] 
-
-在WEB前端中，性能消耗最大的就是DOM操作，而且这部分代码会很难维护。
-
-React是把真实的DOM树转成Js对象树，也就是Virtual DOM。
-
-[2]
-
-每次数据更新后，重新计算Virtual DOM，和上一次做对比，对发生变化的部分，做批量更新。React有`shouldComponentUpdate`声明周期回调，来减少数据变化后不必要的对比过程，以保证性能。
-
-
-## 3、函数式编程
-React把过去不断重复构建UI的过程抽成组件，在给定参数的情况下，约定渲染对应的UI界面。
-
-React充分利用很多函数式方法去减少冗余代码。
-
-函数式编程才是React的精髓。
 
 
 # JSX语法
@@ -73,6 +44,8 @@ WEB页面从`HTML`转`JSON`对象。示例：
 }
 ```
 这样就可以在JS中创建虚拟DOM了。
+
+
 
 
 ### 组件元素
@@ -213,78 +186,3 @@ React会将所有要显示的DOM的字符串转义，防止XSS。
 
 React提供了dangerousSetInnerHtml属性。它的作用是避免React转义字符，在确定必要的情况下可以使用它: <div dangerouslySetInnerHtml={{__html: 'cc &copy; 2019'}} />
 ```
-
-
-# React组件
-React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。
-
-官方在React组件构建上提供了三种不同的方法：
-- React.createClass
-- ES6 Classes
-- 无状态函数(stateless function)
-
-
-## `React.createClas`
-这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是React官方唯一指定的组件写法。
-```js
-const Button = React.createClass({
-  getDefaultProps() {
-    return {
-      color: 'blue',
-      text: 'Confirm'
-    }
-  },
-  render(){
-    const {color, text} = this.props
-    return (
-      <button className=`{btn btn-${color}}`>
-        <em>{text}</em>
-      </button>
-    )
-  }
-})
-```
-
-
-## `ES6 Classes`
-```js
-import React, {Component} from 'React'
-class Button extends Component {
-  constructor(props) {
-    super(props)
-  }
-  static defaultProps = {
-    color: 'blue',
-    text: 'Confirm'
-  }
-  render(){
-    const {color, text} = this.props
-    return (
-      <button className=`{btn btn-${color}}`>
-        <em>{text}</em>
-      </button>
-    )
-  }
-}
-```
-在React应用中，极少让子类去继承功能组件。试想在UI层面小的修改就会影响到整体交互或样式，牵一发而动全身，用继承来抽象往往是事倍功半。
-在React组件开发中，常用的方式将组件拆分到合理的粒度，用组合的方式合成业务组件。
-
-## 无状态函数
-在0.14版本之后新增的，且官方推崇。
-```js
-function Button({color='blue', text='Confirm'}) {
-  return (
-      <button className={`btn btn-${color}`}>
-        <em>{text}</em>
-      </button>
-  )
-}
-```
-无状态组件，只传入props和context两个参数；它不存在state，也没有生命周期方法，render方法。
-不过像propTypes和defaultProps还是可以通过向方法设置静态属性来实现的。
-
-在合适的情况下，都应该且必须使用无状态组件。无状态组件不像上述两种方法在调用的时会创建新实例，它创建时始终保持了一个实例，避免了不必要的检查和内存分配，做到了内部优化。
-
-
-
