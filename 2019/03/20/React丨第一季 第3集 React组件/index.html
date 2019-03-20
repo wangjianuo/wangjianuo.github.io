@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="React组件React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。 官方在React组件构建上提供了三种不同的方法：  React.createClass ES6 Classes 无状态函数(stateless function)  React.createClas这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是React">
+<meta name="description" content="React组件React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。 官方在React组件构建上提供了三种不同的方法：  React.createClass ES6 Classes 无状态函数(stateless function)  React.createClass这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是Reac">
 <meta name="keywords" content="React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React丨第一季 第3集 React组件">
 <meta property="og:url" content="http://yoursite.com/2019/03/20/React丨第一季 第3集 React组件/index.html">
 <meta property="og:site_name" content="Wx&#39;s Blog">
-<meta property="og:description" content="React组件React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。 官方在React组件构建上提供了三种不同的方法：  React.createClass ES6 Classes 无状态函数(stateless function)  React.createClas这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是React">
+<meta property="og:description" content="React组件React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。 官方在React组件构建上提供了三种不同的方法：  React.createClass ES6 Classes 无状态函数(stateless function)  React.createClass这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是Reac">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-20T08:50:42.627Z">
+<meta property="og:updated_time" content="2019-03-20T09:50:16.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React丨第一季 第3集 React组件">
-<meta name="twitter:description" content="React组件React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。 官方在React组件构建上提供了三种不同的方法：  React.createClass ES6 Classes 无状态函数(stateless function)  React.createClas这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是React">
+<meta name="twitter:description" content="React组件React组件基本由3个部分组成：属性(props)、状态(state)、生命周期。 官方在React组件构建上提供了三种不同的方法：  React.createClass ES6 Classes 无状态函数(stateless function)  React.createClass这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是Reac">
 
 
 
@@ -324,7 +324,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-20T16:48:04+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-20T19:48:04+08:00">
                 2019-03-20
               </time>
             
@@ -391,7 +391,7 @@
 <li>ES6 Classes</li>
 <li>无状态函数(stateless function)</li>
 </ul>
-<h2 id="React-createClas"><a href="#React-createClas" class="headerlink" title="React.createClas"></a><code>React.createClas</code></h2><p>这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是React官方唯一指定的组件写法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = React.createClass(&#123;</span><br><span class="line">  getDefaultProps() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      color: <span class="string">'blue'</span>,</span><br><span class="line">      text: <span class="string">'Confirm'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;color, text&#125; = <span class="keyword">this</span>.props</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;button className=<span class="string">`&#123;btn btn-<span class="subst">$&#123;color&#125;</span>&#125;`</span>&gt;</span><br><span class="line">        &lt;em&gt;&#123;text&#125;&lt;<span class="regexp">/em&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>button&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="React-createClass"><a href="#React-createClass" class="headerlink" title="React.createClass"></a><code>React.createClass</code></h2><p>这种方式是构建组件是React最传统、也是兼容最好的方法。在0.14版本发布之前，这一直都是React官方唯一指定的组件写法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = React.createClass(&#123;</span><br><span class="line">  getDefaultProps() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      color: <span class="string">'blue'</span>,</span><br><span class="line">      text: <span class="string">'Confirm'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;color, text&#125; = <span class="keyword">this</span>.props</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;button className=<span class="string">`&#123;btn btn-<span class="subst">$&#123;color&#125;</span>&#125;`</span>&gt;</span><br><span class="line">        &lt;em&gt;&#123;text&#125;&lt;<span class="regexp">/em&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>button&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
 <h2 id="ES6-Classes"><a href="#ES6-Classes" class="headerlink" title="ES6 Classes"></a><code>ES6 Classes</code></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'React'</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">static</span> defaultProps = &#123;</span><br><span class="line">    color: <span class="string">'blue'</span>,</span><br><span class="line">    text: <span class="string">'Confirm'</span></span><br><span class="line">  &#125;</span><br><span class="line">  render()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;color, text&#125; = <span class="keyword">this</span>.props</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;button className=<span class="string">`&#123;btn btn-<span class="subst">$&#123;color&#125;</span>&#125;`</span>&gt;</span><br><span class="line">        &lt;em&gt;&#123;text&#125;&lt;<span class="regexp">/em&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>button&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在React应用中，极少让子类去继承功能组件。试想在UI层面小的修改就会影响到整体交互或样式，牵一发而动全身，用继承来抽象往往是事倍功半。<br>在React组件开发中，常用的方式将组件拆分到合理的粒度，用组合的方式合成业务组件。</p>
 <h2 id="无状态函数"><a href="#无状态函数" class="headerlink" title="无状态函数"></a>无状态函数</h2><p>在0.14版本之后新增的，且官方推崇。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Button</span>(<span class="params">&#123;color=<span class="string">'blue'</span>, text=<span class="string">'Confirm'</span>&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">      &lt;button className=&#123;<span class="string">`btn btn-<span class="subst">$&#123;color&#125;</span>`</span>&#125;&gt;</span><br><span class="line">        &lt;em&gt;&#123;text&#125;&lt;<span class="regexp">/em&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>button&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -436,6 +436,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/20/React丨第一季 第4集 React数据流/" rel="prev" title="React丨第一季 第4集 React数据流">
+                React丨第一季 第4集 React数据流 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -510,7 +514,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -580,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React组件"><span class="nav-number">1.</span> <span class="nav-text">React组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-createClas"><span class="nav-number">1.1.</span> <span class="nav-text">React.createClas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-Classes"><span class="nav-number">1.2.</span> <span class="nav-text">ES6 Classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无状态函数"><span class="nav-number">1.3.</span> <span class="nav-text">无状态函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React组件"><span class="nav-number">1.</span> <span class="nav-text">React组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-createClass"><span class="nav-number">1.1.</span> <span class="nav-text">React.createClass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-Classes"><span class="nav-number">1.2.</span> <span class="nav-text">ES6 Classes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无状态函数"><span class="nav-number">1.3.</span> <span class="nav-text">无状态函数</span></a></li></ol></li></ol></div>
             
 
           </div>
