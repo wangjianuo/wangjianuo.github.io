@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[React丨第一季 第5集 React生命周期]]></title>
+    <url>%2F2019%2F03%2F26%2FReact%E4%B8%A8%E7%AC%AC%E4%B8%80%E5%AD%A3%20%E7%AC%AC5%E9%9B%86%20React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
+    <content type="text"><![CDATA[React生命周期React life cycle 分为两类： 当组件在挂载或卸载时； 当组件接收新的数据时，即组件更新时。 挂载过程组件挂载：主要做组件状态的初始化。 12345678910111213class App extends Component &#123; static propTypes = &#123; &#125; // props类型检查 static defaultProps = &#123; &#125; // props默认类型 constructor(props) &#123; super(props) this.state = &#123; &#125; // 初始化state &#125; componentWillMount() &#123;&#125; // render之前 componentDidMound() &#123;&#125; // render之后 render() &#123; return &lt;div&gt;this is a demo&lt;/div&gt; &#125;&#125; 这propTypes和defaultProps两个属性被声明为static属性，表示外面也可以访问它们，如：App.propTypes和App.defaultProps; 如果在componentDidMound执行setState方法，那么在初始化的时候，就渲染了两次。这并不好。但在实际的场景中，如计算组件的位置或宽高时，不得不让组件先寻人，更新必要的信息后，再次渲染。 卸载过程123456class App extends Component &#123; componentWillUnmount() &#123;&#125; // 执行清理方法。如：回收或清楚定时器等 render() &#123; return &lt;div&gt;this is a demo.&lt;/div&gt; &#125;&#125; 数据更新过程更新是指：父组件向下传递props或组件自身执行setState方法时，发生的更新动作。 执行setState，那么会依次执行1234shouldComponentUpdate(nextProps, nextState) &#123; return true &#125; // false：组件不再向下执行生命周期方法componentWillUpdate(nextProps, nextState) &#123; &#125; // 更新渲染前render() &#123; return &lt;div&gt;dmeo&lt;/div&gt; &#125;componentDidUpdate(preProps, preState) &#123; &#125; // 更新渲染后 组件是由父组件更新props而更新的，那在shouldComponentUpdate之前会先执行componentWillReceiveProps方法。这个方法可以作为React在props传后后，渲染之前setState的机会。在这个方法调用setState是不会二次渲染的。 React生命周期流程图 ES6 Classes 和 createClass构建组件方法的异同 在初始化方法有所不同，但生命周期函数没有变化。在ES6 Class中的静态法用静态关键词static声明。 推荐更倾向于ES6 Class方式来构建组件。]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[React丨第一季 第4集 React数据流]]></title>
     <url>%2F2019%2F03%2F20%2FReact%E4%B8%A8%E7%AC%AC%E4%B8%80%E5%AD%A3%20%E7%AC%AC4%E9%9B%86%20React%E6%95%B0%E6%8D%AE%E6%B5%81%2F</url>
     <content type="text"><![CDATA[React数据流在React中，数据是从上向下单向流动的，即从父组件到子组件。这个原则让组件之间的关系变得简单且可预测。 state和props是React组件中最重要的概念。 如果顶层组件初始化props，那么React会向下遍历整棵组件数，重新尝试渲染所有相关的子组件。 state只关心每隔组件自己的内部的状态，这些状态只能在组件内部改变。 把组件看成一个函数，那么它接收了props作为参数，内部由state作为函数的内部参数，返回一个虚拟DOM的实现。 state管理组件的内部状态，React中，把这类状态称为state。 当组件内部使用库内置的setState方法时，最大的表现行为就是该组件会重新渲染。 1234567891011121314handleClick(e) &#123; e.preventDefault() this.setState(&#123; count: this.state.count + 1 &#125;)&#125;render() &#123; return ( &lt;div&gt; &lt;p&gt;&#123;this.state.count&#125;&lt;/p&gt; &lt;a href="#" onClick=&#123;this.handleClick&#125;&gt;更新&lt;/a&gt; &lt;/div&gt; )&#125; 注意：setState是一个异步的方法，一个生命周期内所有的setState方法会合并操作。 state很棒，但项目的深入，并不推荐滥用state，过多的内部状态会让数据流混乱，程序难易维护。 React组件设计，分别有如下两种组件： 智能组件 木偶组件 propsprops是properties的缩写。 props是React用来让组件之间互相联系的一种机制 ，就像方法的参数一样。 React的单向数据流，主要的流动管道就是props。 props本身是不可变的。当改变props的原始值时，React会报错，组件的props一定来于默认属性或通过父组件传递而来。 如果要渲染一个对props加工后的值，最简单的方法就是使用局部变量或直接在jsx中计算结果。 子组件prop在React中有一个重要且内置的prop – children，它代表组件的子组件集合。 1234567render() &#123; return ( &lt;div&gt; &#123;React.Children.map(this.props.children, (child) =&gt; &#123;...&#125;)&#125; &lt;/div&gt; )&#125; 这种调用方式称为子组件。它指的是组件内的子组件是通过动态计算得到的。 组件porps用function prop 与父组件通信对于state来说，它的通信集中在组件内部；对于props来说，它的通信是父组件向子组件的传播。 123handleClick(index) &#123; this.props.onClick(&#123;index&#125;)&#125; 通过点击事件handleClick触发了onClick prop回调函数给父组件必要的值。 propTypesJS不是强类型语言。正是一个开发时约束的问题。React推处了propTypes。 propTypes用于规范props的类型与必需的状态。如果组件定义propTypes，那么在开发环境下，就会组件的props值的类型作检查，如果不匹配，React实时在控制台报警告。在生产环境下，这是不会进行检查的。 123456static propTypes = &#123; classPrefix: React.PropTypes.string, activeIndex: React.PropTypes.number, onChange: React.PropTypes.func, isLogin: React.PropTypes.bool&#125; propTypes有很多类型支持，不仅有基础类型，还包括枚举和自定义类型。]]></content>
@@ -167,18 +178,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Roadmap丨JavaWeb Dev in 2019]]></title>
-    <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8JavaWeb%20Dev%20in%202019%2F</url>
-    <content type="text"><![CDATA[JAVA WEB基础原理 Java JDK8 JVM 线程 并发 秒杀 负载 WEB框架 Spring Springboot SpringCloud MyBaits JPA DB MySQL 服务器 Tomcat Nginx 高阶 ELK MQ ZK Netty Dubbo 工具 Maven Git 容器 Docker K8S 大数据 Hadoop HDFS MapReduce Hbase Pig Hive Spark Storm Linux setup mysql nginx tomcat jdk elk docker 基础命令]]></content>
-      <categories>
-        <category>Roadmap</category>
-      </categories>
-      <tags>
-        <tag>Roadmap</tag>
-        <tag>JAVA WEB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Roadmap丨Web Front-end Dev in 2019]]></title>
     <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8Web%20Front-end%20Dev%20in%202019%2F</url>
     <content type="text"><![CDATA[Web Front-end React react-router redux antd antd-mobile dva umi SSR Next.js After.js Webpack code spliting dll Gulp Web Front-end Containerization docker k8s Vue vue-cli vue-router vuex SSR Nuxt.js ES6/ES7 Web Front-end Security Web Front-end Optimization Nginx GZip Package Managers npm 开发一个NPM模块 yarn CSS Box Model Grid Flex Media Querie CSS Pre-processors Less Sass PostCSS CSS Frameworks BootStrap Basics of TypeScript Basics of JavaScript 闭包 作用域 变量提升 XHR和Ajax发起HTTP请求 第三方模块 moment.js Node.js express koa2 WeChat 小程序 公众号 H5开发 浏览器差异 可视化 ECharts D3.js Canvas SVG WebGL RESTful Git 参考资料1https://github.com/kamranahmedse/developer-roadmap]]></content>
@@ -188,6 +187,18 @@
       <tags>
         <tag>Roadmap</tag>
         <tag>WEB FRONTEND</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Roadmap丨JavaWeb Dev in 2019]]></title>
+    <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8JavaWeb%20Dev%20in%202019%2F</url>
+    <content type="text"><![CDATA[JAVA WEB基础原理 Java JDK8 JVM 线程 并发 秒杀 负载 WEB框架 Spring Springboot SpringCloud MyBaits JPA DB MySQL 服务器 Tomcat Nginx 高阶 ELK MQ ZK Netty Dubbo 工具 Maven Git 容器 Docker K8S 大数据 Hadoop HDFS MapReduce Hbase Pig Hive Spark Storm Linux setup mysql nginx tomcat jdk elk docker 基础命令]]></content>
+      <categories>
+        <category>Roadmap</category>
+      </categories>
+      <tags>
+        <tag>Roadmap</tag>
+        <tag>JAVA WEB</tag>
       </tags>
   </entry>
 </search>
