@@ -292,6 +292,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/29/React丨第一季 第6集 React与DOM/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="W.x.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/29/React丨第一季 第6集 React与DOM/" itemprop="url">React丨第一季 第6集 React与DOM</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-29T09:31:43+08:00">
+                2019-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="React与DOM"><a href="#React与DOM" class="headerlink" title="React与DOM"></a>React与DOM</h1><p>从React0.14版本开始，React将React中涉及DOM操作的部分剥离开，<br>目的是为了抽象React，同时适用于Web端和移动端。<br>ReactDOM的关注点在DOM上，因此适用于WEB端。</p>
+<p>在React组件的开发实现中，并不会用到ReactDOM，只有在顶层组件以及由于React模型所限而不得不操作DOM的时候，才会使用它。</p>
+<h3 id="ReactDOM"><a href="#ReactDOM" class="headerlink" title="ReactDOM"></a>ReactDOM</h3><p>API非常少，只有<code>findDOMNode</code>, <code>unmountComponentAtNode</code>和<code>render</code>。</p>
+<h4 id="findDOMNode"><a href="#findDOMNode" class="headerlink" title="findDOMNode"></a>findDOMNode</h4><p>在组件生命周期，DOM真正被添加到HTML中的生命周期方法是<code>componentDidMount</code>和<code>componentDidUpdate</code>方法。<br>在这两个方法中，我们看可以获取真正的DOM元素。<br>React提供获取DOM元素的方法有两种，其一是ReactDOM提供的<code>findDOMNode</code>。<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="comment">// this 为当前组件的实例</span></span><br><span class="line">    <span class="keyword">const</span> dom = ReactDOM.findDOMNode(<span class="keyword">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  render() &#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果在render中返回null，那么<code>findDOMNode</code>也返回<code>null</code>。<code>findDOMNode</code>只对已经挂载的组件有效。</p>
+<h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><p>把React渲染的虚拟DOM渲染到浏览器的DOM当中，就要使用render方法。<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ReactComponent render(</span><br><span class="line">  ReactElement element,</span><br><span class="line">  DOMElement container,</span><br><span class="line">  [<span class="function"><span class="keyword">function</span> <span class="title">callback</span>]</span></span><br><span class="line"><span class="function">)</span></span><br></pre></td></tr></table></figure></p>
+<p>该方法把元素挂载到container中，并返回element的实例（即refs引用）。<br>当然，如果是无状态组件，render会返回null。当组件装载完毕时，callback就会被调用。</p>
+<p>当组件在初次渲染之后，再次更新时，React不会把整个组件重新渲染一次，而会用它高效的DOM diff算法做布局的更新。<br>这是React最大的亮点之一。</p>
+<h4 id="refs"><a href="#refs" class="headerlink" title="refs"></a>refs</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myAppInstance = ReactDOM.render(&lt;App/&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</span><br><span class="line">myAppInstance.doSth()</span><br></pre></td></tr></table></figure>
+<p>利用render方法得到了App组件的实例，然后就可以对它做一些操作。<br>但在组件内，jsx是不会返回一个组件的实例的。它只是一个ReactElement，只是告诉React被挂载的组件应该长什么样的<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myApp = &lt;App /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>refs就是为此而生，它是React组件 中非常特殊的props，可以附加到任何一个组件上。<br>组件被调用时会新建一个该组件的实例，而refs就会指向这个实例。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123; </span><br><span class="line">  <span class="keyword">const</span> myComp = <span class="keyword">this</span>.refs.myComp; </span><br><span class="line">  <span class="keyword">const</span> dom = findDOMNode(myComp); </span><br><span class="line">&#125; </span><br><span class="line">render() &#123; </span><br><span class="line">  <span class="keyword">return</span> ( </span><br><span class="line">    &lt;div&gt; </span><br><span class="line">      &lt;Comp ref=<span class="string">"myComp"</span> /&gt; </span><br><span class="line">    &lt;<span class="regexp">/div&gt; </span></span><br><span class="line"><span class="regexp">  ); </span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>对于React组件来说，refs会指向一个组件类的实例，所以可以调用该类定义的任何方法。<br>如果需要访问该组件的真是DOM，可以用ReactDOM。findDOMNode来找到DOM节点，但并不推荐这样做。<br>因为这在大部分情况下都打破了封装性，而且通常能用更新清晰的办法在React中构建代码。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/React丨第一季 第5集 React生命周期/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1776,153 +1930,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/Linux丨CentOS6.8安装Tomcat7/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="W.x.">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wx's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/18/Linux丨CentOS6.8安装Tomcat7/" itemprop="url">Linux丨CentOS6.8安装Tomcat7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-18T16:39:52+08:00">
-                2019-02-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 系统环境：CentOS6.8 64bit</span><br><span class="line">- Tomat版本：7.0.92</span><br><span class="line">- IP: 192.168.9.128</span><br></pre></td></tr></table></figure>
-<h3 id="下载，上传，解压"><a href="#下载，上传，解压" class="headerlink" title="下载，上传，解压"></a><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="noopener">下载</a>，上传，解压</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 ~]# tar -zxvf apache-tomcat-7.0.92.tar.gz -C /usr/local/tomcat/</span><br></pre></td></tr></table></figure>
-<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]# cd tomcat/apache-tomcat-7.0.92/bin/</span><br><span class="line">[root@node01 bin]# ./startup.sh </span><br><span class="line">Using CATALINA_BASE:   /usr/local/tomcat/apache-tomcat-7.0.92</span><br><span class="line">Using CATALINA_HOME:   /usr/local/tomcat/apache-tomcat-7.0.92</span><br><span class="line">Using CATALINA_TMPDIR: /usr/local/tomcat/apache-tomcat-7.0.92/temp</span><br><span class="line">Using JRE_HOME:        /usr/local/java/jdk1.8.0_201</span><br><span class="line">Using CLASSPATH:       /usr/local/tomcat/apache-tomcat-7.0.92/bin/bootstrap.jar:/usr/local/tomcat/apache-tomcat-7.0.92/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br></pre></td></tr></table></figure>
-<h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 bin]# ./shutdown.sh </span><br><span class="line">Using CATALINA_BASE:   /usr/local/tomcat/apache-tomcat-7.0.92</span><br><span class="line">Using CATALINA_HOME:   /usr/local/tomcat/apache-tomcat-7.0.92</span><br><span class="line">Using CATALINA_TMPDIR: /usr/local/tomcat/apache-tomcat-7.0.92/temp</span><br><span class="line">Using JRE_HOME:        /usr/local/java/jdk1.8.0_201</span><br><span class="line">Using CLASSPATH:       /usr/local/tomcat/apache-tomcat-7.0.92/bin/bootstrap.jar:/usr/local/tomcat/apache-tomcat-7.0.92/bin/tomcat-juli.jar</span><br><span class="line">[root@node01 bin]#</span><br></pre></td></tr></table></figure>
-<h3 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 bin]# /sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT</span><br><span class="line">[root@node01 bin]# /etc/rc.d/init.d/iptables save</span><br></pre></td></tr></table></figure>
-<p>浏览器访问<code>192.168.9.128:8080</code>，打开<code>tomcat</code>页面，表示成功！</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://tomcat.apache.org/download-70.cgi</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1971,7 +1978,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>

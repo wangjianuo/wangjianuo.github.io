@@ -292,6 +292,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/Linux丨CentOS6.8安装Tomcat7/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="W.x.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/18/Linux丨CentOS6.8安装Tomcat7/" itemprop="url">Linux丨CentOS6.8安装Tomcat7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-18T16:39:52+08:00">
+                2019-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 系统环境：CentOS6.8 64bit</span><br><span class="line">- Tomat版本：7.0.92</span><br><span class="line">- IP: 192.168.9.128</span><br></pre></td></tr></table></figure>
+<h3 id="下载，上传，解压"><a href="#下载，上传，解压" class="headerlink" title="下载，上传，解压"></a><a href="http://tomcat.apache.org/download-70.cgi" target="_blank" rel="noopener">下载</a>，上传，解压</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 ~]# tar -zxvf apache-tomcat-7.0.92.tar.gz -C /usr/local/tomcat/</span><br></pre></td></tr></table></figure>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 local]# cd tomcat/apache-tomcat-7.0.92/bin/</span><br><span class="line">[root@node01 bin]# ./startup.sh </span><br><span class="line">Using CATALINA_BASE:   /usr/local/tomcat/apache-tomcat-7.0.92</span><br><span class="line">Using CATALINA_HOME:   /usr/local/tomcat/apache-tomcat-7.0.92</span><br><span class="line">Using CATALINA_TMPDIR: /usr/local/tomcat/apache-tomcat-7.0.92/temp</span><br><span class="line">Using JRE_HOME:        /usr/local/java/jdk1.8.0_201</span><br><span class="line">Using CLASSPATH:       /usr/local/tomcat/apache-tomcat-7.0.92/bin/bootstrap.jar:/usr/local/tomcat/apache-tomcat-7.0.92/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br></pre></td></tr></table></figure>
+<h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 bin]# ./shutdown.sh </span><br><span class="line">Using CATALINA_BASE:   /usr/local/tomcat/apache-tomcat-7.0.92</span><br><span class="line">Using CATALINA_HOME:   /usr/local/tomcat/apache-tomcat-7.0.92</span><br><span class="line">Using CATALINA_TMPDIR: /usr/local/tomcat/apache-tomcat-7.0.92/temp</span><br><span class="line">Using JRE_HOME:        /usr/local/java/jdk1.8.0_201</span><br><span class="line">Using CLASSPATH:       /usr/local/tomcat/apache-tomcat-7.0.92/bin/bootstrap.jar:/usr/local/tomcat/apache-tomcat-7.0.92/bin/tomcat-juli.jar</span><br><span class="line">[root@node01 bin]#</span><br></pre></td></tr></table></figure>
+<h3 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@node01 bin]# /sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT</span><br><span class="line">[root@node01 bin]# /etc/rc.d/init.d/iptables save</span><br></pre></td></tr></table></figure>
+<p>浏览器访问<code>192.168.9.128:8080</code>，打开<code>tomcat</code>页面，表示成功！</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://tomcat.apache.org/download-70.cgi</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/18/Linux丨CentOS6.8安装MySQL5-6/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1557,7 +1704,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
