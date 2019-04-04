@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Git丨空文件夹提交.md]]></title>
+    <url>%2F2019%2F04%2F04%2FGit%E4%B8%A8%E7%A9%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E6%8F%90%E4%BA%A4%2F</url>
+    <content type="text"><![CDATA[空文件夹提交解决：1find . -type d -empty -exec touch &#123;&#125;/.gitignore \;]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[React丨第二季 第1集 聊聊事件]]></title>
     <url>%2F2019%2F04%2F02%2FReact%E4%B8%A8%E7%AC%AC%E4%BA%8C%E5%AD%A3%20%E7%AC%AC1%E9%9B%86%20%E8%81%8A%E8%81%8A%E4%BA%8B%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[事件系统Virtual DOM 在内存中是以对象的形式存在的，如果想要在这些对象上添加事件，就会非常简单。React 基于 Virtual DOM 实现了一个 SyntheticEvent （合成事件）层，我们所定义的事件处理器会接收到一个 SyntheticEvent 对象的实例。并且与原生的浏览器事件一样拥有同样的接口，同样支持事件的冒泡机制，我们可以使用 stopPropagation() 和 preventDefault() 来中断它。所有事件都自动绑定到最外层上。如果需要访问原生事件对象，可以使用 nativeEvent 属性。 合成事件的实现机制在 React 底层，主要对合成事件做了两件事：事件委派和自动绑定。 事件委派React事件的代理机制：它并不会把事件处理函数直接绑定到真实的节点上，而是把所有事件绑定到结构的最外层，使用一个统一的事件监听器，这个事件监听器上维持了一个映射来保存所有组件内部的事件监听和处理函数。当组件挂载或卸载时，只是在这个统一的事件监听器上插入或删除一些对象；当事件发生时，首先被这个统一的事件监听器处理，然后在映射里找到真正的事件处理函数并调用。这样做简化了事件处理和回收机制，效率也有很大提升。 自动绑定在使用 ES6 classes 或者纯函数时，我们需要手动实现 this 的绑定。 常用的几种绑定方法： 方法1：bind方法.这个方法可以帮助我们绑定事件处理器内的 this ，并可以向事件处理器中传递参数.123456class App extends Component &#123; handleClick(e, arg) &#123; &#125; render() &#123; return &lt;button onClick=&#123;this.handleClick(this, 'text')&#125;&gt;button&lt;/button&gt; &#125;&#125; 方法2：构造器内声明在组件的构造器内完成了 this 的绑定，这种绑定方式的好处在于仅需要进行一次绑定，而不需要每次调用事件监听器时去执行绑定操作.12345678910class App extends Component &#123; constructor(props) &#123; super(props); this.handleClick = this.handleClick.bind(this) &#125; handleClick(e) &#123; &#125; render() &#123; return &lt;button onClick=&#123;this.handleClick&#125;&gt;button&lt;/button&gt; &#125;&#125; 方法3：箭头函数箭头函数不仅是函数的语法糖，它还自动绑定了定义此函数作用域的this，因此我们不需要再对它使用bind方法。12345678class App extends Component &#123; const handleClick = (e) =&gt; &#123; log(e) &#125; render() &#123; return &lt;button onClick=&#123;this.handleClick&#125;&gt;button&lt;/button&gt; &#125;&#125; 或12345678class App extends Component &#123; handleClick(e)&#123; log(e) &#125; render() &#123; return &lt;button onClick=&#123;() =&gt; this.handleClick()&#125;&gt;button&lt;/button&gt; &#125;&#125; 在React中使用原生事件在componentDidMount会在组件已经完成安装并且在浏览器中存在真实的DOM后电泳，此时可以完成原生事件的绑定。123456789101112class App extends Component &#123; componentDidMount() &#123; this.refs.button.addEventListener('click', e =&gt; &#123;this.handleClick(e)&#125;) &#125; handleClick(e) &#123; console.log(e) &#125; componentWillUnmount() &#123; this.refs.button.removeEventListener('click') &#125; render() &#123; return &lt;button ref="button"&gt;TEST&lt;/button&gt; &#125;&#125; 注：在React中使用DOM原生事件时，一定要在组件卸载时手动移除，否则很可能出现内存泄漏的问题。 而使用合成事件系统时则不需要，React内部已经帮你处理了。]]></content>
