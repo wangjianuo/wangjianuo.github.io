@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[React丨第二季 第1集 聊聊事件]]></title>
+    <url>%2F2019%2F04%2F02%2FReact%E4%B8%A8%E7%AC%AC%E4%BA%8C%E5%AD%A3%20%E7%AC%AC1%E9%9B%86%20%E8%81%8A%E8%81%8A%E4%BA%8B%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[事件系统Virtual DOM 在内存中是以对象的形式存在的，如果想要在这些对象上添加事件，就会非常简单。React 基于 Virtual DOM 实现了一个 SyntheticEvent （合成事件）层，我们所定义的事件处理器会接收到一个 SyntheticEvent 对象的实例。并且与原生的浏览器事件一样拥有同样的接口，同样支持事件的冒泡机制，我们可以使用 stopPropagation() 和 preventDefault() 来中断它。所有事件都自动绑定到最外层上。如果需要访问原生事件对象，可以使用 nativeEvent 属性。 合成事件的实现机制在 React 底层，主要对合成事件做了两件事：事件委派和自动绑定。 事件委派React事件的代理机制：它并不会把事件处理函数直接绑定到真实的节点上，而是把所有事件绑定到结构的最外层，使用一个统一的事件监听器，这个事件监听器上维持了一个映射来保存所有组件内部的事件监听和处理函数。当组件挂载或卸载时，只是在这个统一的事件监听器上插入或删除一些对象；当事件发生时，首先被这个统一的事件监听器处理，然后在映射里找到真正的事件处理函数并调用。这样做简化了事件处理和回收机制，效率也有很大提升。 自动绑定在使用 ES6 classes 或者纯函数时，我们需要手动实现 this 的绑定。 常用的几种绑定方法： 方法1：bind方法.这个方法可以帮助我们绑定事件处理器内的 this ，并可以向事件处理器中传递参数.123456class App extends Component &#123; handleClick(e, arg) &#123; &#125; render() &#123; return &lt;button onClick=&#123;this.handleClick(this, 'text')&#125;&gt;button&lt;/button&gt; &#125;&#125; 方法2：构造器内声明在组件的构造器内完成了 this 的绑定，这种绑定方式的好处在于仅需要进行一次绑定，而不需要每次调用事件监听器时去执行绑定操作.12345678910class App extends Component &#123; constructor(props) &#123; super(props); this.handleClick = this.handleClick.bind(this) &#125; handleClick(e) &#123; &#125; render() &#123; return &lt;button onClick=&#123;this.handleClick&#125;&gt;button&lt;/button&gt; &#125;&#125; 方法3：箭头函数箭头函数不仅是函数的语法糖，它还自动绑定了定义此函数作用域的this，因此我们不需要再对它使用bind方法。12345678class App extends Component &#123; const handleClick = (e) =&gt; &#123; log(e) &#125; render() &#123; return &lt;button onClick=&#123;this.handleClick&#125;&gt;button&lt;/button&gt; &#125;&#125; 或12345678class App extends Component &#123; handleClick(e)&#123; log(e) &#125; render() &#123; return &lt;button onClick=&#123;() =&gt; this.handleClick()&#125;&gt;button&lt;/button&gt; &#125;&#125; 在React中使用原生事件在componentDidMount会在组件已经完成安装并且在浏览器中存在真实的DOM后电泳，此时可以完成原生事件的绑定。123456789101112class App extends Component &#123; componentDidMount() &#123; this.refs.button.addEventListener('click', e =&gt; &#123;this.handleClick(e)&#125;) &#125; handleClick(e) &#123; console.log(e) &#125; componentWillUnmount() &#123; this.refs.button.removeEventListener('click') &#125; render() &#123; return &lt;button ref="button"&gt;TEST&lt;/button&gt; &#125;&#125; 注：在React中使用DOM原生事件时，一定要在组件卸载时手动移除，否则很可能出现内存泄漏的问题。 而使用合成事件系统时则不需要，React内部已经帮你处理了。]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[React丨第一季 第6集 React与DOM]]></title>
     <url>%2F2019%2F03%2F29%2FReact%E4%B8%A8%E7%AC%AC%E4%B8%80%E5%AD%A3%20%E7%AC%AC6%E9%9B%86%20React%E4%B8%8EDOM%2F</url>
     <content type="text"><![CDATA[React与DOM从React0.14版本开始，React将React中涉及DOM操作的部分剥离开，目的是为了抽象React，同时适用于Web端和移动端。ReactDOM的关注点在DOM上，因此适用于WEB端。 在React组件的开发实现中，并不会用到ReactDOM，只有在顶层组件以及由于React模型所限而不得不操作DOM的时候，才会使用它。 ReactDOMAPI非常少，只有findDOMNode, unmountComponentAtNode和render。 findDOMNode在组件生命周期，DOM真正被添加到HTML中的生命周期方法是componentDidMount和componentDidUpdate方法。在这两个方法中，我们看可以获取真正的DOM元素。React提供获取DOM元素的方法有两种，其一是ReactDOM提供的findDOMNode。1234567class App extends Component &#123; componentDidMount() &#123; // this 为当前组件的实例 const dom = ReactDOM.findDOMNode(this) &#125; render() &#123; &#125;&#125; 如果在render中返回null，那么findDOMNode也返回null。findDOMNode只对已经挂载的组件有效。 render把React渲染的虚拟DOM渲染到浏览器的DOM当中，就要使用render方法。12345ReactComponent render( ReactElement element, DOMElement container, [function callback]) 该方法把元素挂载到container中，并返回element的实例（即refs引用）。当然，如果是无状态组件，render会返回null。当组件装载完毕时，callback就会被调用。 当组件在初次渲染之后，再次更新时，React不会把整个组件重新渲染一次，而会用它高效的DOM diff算法做布局的更新。这是React最大的亮点之一。 refs12const myAppInstance = ReactDOM.render(&lt;App/&gt;, document.getElementById('root'))myAppInstance.doSth() 利用render方法得到了App组件的实例，然后就可以对它做一些操作。但在组件内，jsx是不会返回一个组件的实例的。它只是一个ReactElement，只是告诉React被挂载的组件应该长什么样的1const myApp = &lt;App /&gt; refs就是为此而生，它是React组件 中非常特殊的props，可以附加到任何一个组件上。组件被调用时会新建一个该组件的实例，而refs就会指向这个实例。 1234567891011componentDidMount() &#123; const myComp = this.refs.myComp; const dom = findDOMNode(myComp); &#125; render() &#123; return ( &lt;div&gt; &lt;Comp ref="myComp" /&gt; &lt;/div&gt; ); &#125; 对于React组件来说，refs会指向一个组件类的实例，所以可以调用该类定义的任何方法。如果需要访问该组件的真是DOM，可以用ReactDOM。findDOMNode来找到DOM节点，但并不推荐这样做。因为这在大部分情况下都打破了封装性，而且通常能用更新清晰的办法在React中构建代码。]]></content>
@@ -189,18 +200,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Roadmap丨Web Front-end Dev in 2019]]></title>
-    <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8Web%20Front-end%20Dev%20in%202019%2F</url>
-    <content type="text"><![CDATA[Web Front-end React react-router redux antd antd-mobile dva umi SSR Next.js After.js Webpack code spliting dll Gulp Web Front-end Containerization docker k8s Vue vue-cli vue-router vuex SSR Nuxt.js ES6/ES7 Web Front-end Security Web Front-end Optimization Nginx GZip Package Managers npm 开发一个NPM模块 yarn CSS Box Model Grid Flex Media Querie CSS Pre-processors Less Sass PostCSS CSS Frameworks BootStrap Basics of TypeScript Basics of JavaScript 闭包 作用域 变量提升 XHR和Ajax发起HTTP请求 第三方模块 moment.js Node.js express koa2 WeChat 小程序 公众号 H5开发 浏览器差异 可视化 ECharts D3.js Canvas SVG WebGL RESTful Git 参考资料1https://github.com/kamranahmedse/developer-roadmap]]></content>
-      <categories>
-        <category>Roadmap</category>
-      </categories>
-      <tags>
-        <tag>Roadmap</tag>
-        <tag>WEB FRONTEND</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Roadmap丨JavaWeb Dev in 2019]]></title>
     <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8JavaWeb%20Dev%20in%202019%2F</url>
     <content type="text"><![CDATA[JAVA WEB基础原理 Java JDK8 JVM 线程 并发 秒杀 负载 WEB框架 Spring Springboot SpringCloud MyBaits JPA DB MySQL 服务器 Tomcat Nginx 高阶 ELK MQ ZK Netty Dubbo 工具 Maven Git 容器 Docker K8S 大数据 Hadoop HDFS MapReduce Hbase Pig Hive Spark Storm Linux setup mysql nginx tomcat jdk elk docker 基础命令]]></content>
@@ -210,6 +209,18 @@
       <tags>
         <tag>Roadmap</tag>
         <tag>JAVA WEB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Roadmap丨Web Front-end Dev in 2019]]></title>
+    <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8Web%20Front-end%20Dev%20in%202019%2F</url>
+    <content type="text"><![CDATA[Web Front-end React react-router redux antd antd-mobile dva umi SSR Next.js After.js Webpack code spliting dll Gulp Web Front-end Containerization docker k8s Vue vue-cli vue-router vuex SSR Nuxt.js ES6/ES7 Web Front-end Security Web Front-end Optimization Nginx GZip Package Managers npm 开发一个NPM模块 yarn CSS Box Model Grid Flex Media Querie CSS Pre-processors Less Sass PostCSS CSS Frameworks BootStrap Basics of TypeScript Basics of JavaScript 闭包 作用域 变量提升 XHR和Ajax发起HTTP请求 第三方模块 moment.js Node.js express koa2 WeChat 小程序 公众号 H5开发 浏览器差异 可视化 ECharts D3.js Canvas SVG WebGL RESTful Git 参考资料1https://github.com/kamranahmedse/developer-roadmap]]></content>
+      <categories>
+        <category>Roadmap</category>
+      </categories>
+      <tags>
+        <tag>Roadmap</tag>
+        <tag>WEB FRONTEND</tag>
       </tags>
   </entry>
 </search>

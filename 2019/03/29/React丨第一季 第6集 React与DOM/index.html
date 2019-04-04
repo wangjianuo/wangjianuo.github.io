@@ -392,8 +392,8 @@
 <h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><p>把React渲染的虚拟DOM渲染到浏览器的DOM当中，就要使用render方法。<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ReactComponent render(</span><br><span class="line">  ReactElement element,</span><br><span class="line">  DOMElement container,</span><br><span class="line">  [<span class="function"><span class="keyword">function</span> <span class="title">callback</span>]</span></span><br><span class="line"><span class="function">)</span></span><br></pre></td></tr></table></figure></p>
 <p>该方法把元素挂载到container中，并返回element的实例（即refs引用）。<br>当然，如果是无状态组件，render会返回null。当组件装载完毕时，callback就会被调用。</p>
 <p>当组件在初次渲染之后，再次更新时，React不会把整个组件重新渲染一次，而会用它高效的DOM diff算法做布局的更新。<br>这是React最大的亮点之一。</p>
-<h4 id="refs"><a href="#refs" class="headerlink" title="refs"></a>refs</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myAppInstance = ReactDOM.render(&lt;App/&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</span><br><span class="line">myAppInstance.doSth()</span><br></pre></td></tr></table></figure>
-<p>利用render方法得到了App组件的实例，然后就可以对它做一些操作。<br>但在组件内，jsx是不会返回一个组件的实例的。它只是一个ReactElement，只是告诉React被挂载的组件应该长什么样的<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myApp = &lt;App /&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="refs"><a href="#refs" class="headerlink" title="refs"></a>refs</h4><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myAppInstance = ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>, <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</span><br><span class="line">myAppInstance.doSth()</span><br></pre></td></tr></table></figure>
+<p>利用render方法得到了App组件的实例，然后就可以对它做一些操作。<br>但在组件内，jsx是不会返回一个组件的实例的。它只是一个ReactElement，只是告诉React被挂载的组件应该长什么样的<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myApp = <span class="xml"><span class="tag">&lt;<span class="name">App</span> /&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>refs就是为此而生，它是React组件 中非常特殊的props，可以附加到任何一个组件上。<br>组件被调用时会新建一个该组件的实例，而refs就会指向这个实例。</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123; </span><br><span class="line">  <span class="keyword">const</span> myComp = <span class="keyword">this</span>.refs.myComp; </span><br><span class="line">  <span class="keyword">const</span> dom = findDOMNode(myComp); </span><br><span class="line">&#125; </span><br><span class="line">render() &#123; </span><br><span class="line">  <span class="keyword">return</span> ( </span><br><span class="line">    &lt;div&gt; </span><br><span class="line">      &lt;Comp ref=<span class="string">"myComp"</span> /&gt; </span><br><span class="line">    &lt;<span class="regexp">/div&gt; </span></span><br><span class="line"><span class="regexp">  ); </span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>对于React组件来说，refs会指向一个组件类的实例，所以可以调用该类定义的任何方法。<br>如果需要访问该组件的真是DOM，可以用ReactDOM。findDOMNode来找到DOM节点，但并不推荐这样做。<br>因为这在大部分情况下都打破了封装性，而且通常能用更新清晰的办法在React中构建代码。</p>
@@ -436,6 +436,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/02/React丨第二季 第1集 聊聊事件/" rel="prev" title="React丨第二季 第1集 聊聊事件">
+                React丨第二季 第1集 聊聊事件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -510,7 +514,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
