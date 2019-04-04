@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Git丨空文件夹提交.md]]></title>
+    <title><![CDATA[Git丨空文件夹提交]]></title>
     <url>%2F2019%2F04%2F04%2FGit%E4%B8%A8%E7%A9%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E6%8F%90%E4%BA%A4%2F</url>
     <content type="text"><![CDATA[空文件夹提交解决：1find . -type d -empty -exec touch &#123;&#125;/.gitignore \;]]></content>
       <categories>
