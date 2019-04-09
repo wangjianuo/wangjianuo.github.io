@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CSS丨从零布局]]></title>
+    <url>%2F2019%2F04%2F08%2FCSS%E4%B8%A8%E4%BB%8E%E9%9B%B6%E5%B8%83%E5%B1%80%2F</url>
+    <content type="text"><![CDATA[浏览器内核浏览器内核分为两个部分：渲染引擎和JS引擎。 渲染引擎：它负责取得网页的内容（HTML、XML、图像等等）、整理样式（例如加入 CSS 等），以及计算网页的显示方式，然后会输出至显示器。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。 JS引擎：是解析 Javascript 语言，执行 javascript语言来实现网页的动态效果。 常见的浏览器内核可以分这四种：Trident(IE)、Gecko(FF)、Blink(chrome)、Webkit(Safari)。 注：Blink是webkit的一个分支。 Web标准构成 结构（html） 表现（css） 行为（js） HTML 块级 h1~h6 p div ul ol li 12341、新行开始2、高度、行高、内外边距，可控3、宽度默认是容器的100%4、可以容纳行内元素和其他块元素 行内 a span strong b em i del s ins u 12341、和相邻行内元素在一行上2、宽高无效。水平方向的padding和margin可以设置，垂直方向无效。3、默认宽度就是自身内容的宽度。4、只能容纳文本或其他行内行内元素。（a特殊） 行内块元素 img input td 1231、和相邻行内元素在一行上，但之间会有空白缝隙2、默认宽度就是本身内容的宽度3、高度、行高、内外边距可以控制 CSS选择器 类 id 通配符 *{ margin:0; padding:0; } 交集 h5.class { color: red; } 并集 .class, h3 { color: red; } 后代 .class h3 { color: red; } 子元素 .class&gt;h3 { color: red; } 伪类 :link :visited :hover :active 显示模式转换 块转行内：display:inline 行内转块：display:block 块、行内转行内块: diaplay:inline-block 盒子模型CSS就是三个大模块：盒子模型、浮动、定位，其他都是细节。 每个盒子组成：元素的内容、内边距（padding）、边框（border）、外边距（margin）组成。 布局稳定性1width &gt; padding &gt; margin 原因： margin会有外边距合并，还有ie6下面margin加倍的bug padding会影响盒子大小，需要进行加减计算 width没毛病 浮动浮动:会脱离标准流的控制，不占位置，会影响标准流。浮动只有左右浮动。 浮动的盒子，漂浮在其他标准流盒子上面 浮动的盒子，不占位置，它原来的位置漏给了标准的盒子 浮动的盒子，需要和标准流的父级搭配使用。找最新的父级元素对齐，但不会超出内边距的范围。 浮动的盒子，可以使元素显示模式体现为行内块特性 版心和布局版心一般在浏览器水平居中显示，常见宽度：960px/980px/1000px/1200px… 清除浮动本质清除浮动主要是为了解决父级元素，因为子级浮动引起内部高度为0的问题。 clear 123clear: left; // 清除左侧浮动clear: right; // 清除右侧浮动clear: both; // 同时清除左右两侧浮动的影响 overflow 12给父级添加overflow: hidden / auto / scroll ， 都可以实现 内容增多时候容易造成不会自动换行导致内容被隐藏掉，无法显示需要溢出的元素。 after:after方法为空元素的升级版，好处是不用单独加标签了1234567891011.clearfix:after &#123; content: '.'; display: block; height: 0; clear: both; visibility: hidden;&#125;.clearfix &#123; *zoom: 1; // IE6,7专用&#125; 优点：符合闭合浮动的思想，结构语义化正确。缺点：ie6，7不支持:after，使用zoom:1触发hasLayout。注意： content:”.” 里面尽量跟一个小点，或者其他，尽量不要为空，否则再firefox 7.0前的版本会有生成空格。 before和after12345678910.clearfix:before,.clearfix:after &#123; content: ""; display: table;&#125;.clearfix:after &#123; clear: both;&#125;.clearfix &#123; *zoom: 1;&#125; 定位 position （子绝父相） static 自动 relative 相对，相对于文档流的位置进行定位 absolute 绝对，相对于其上一个已经定位的父元素进行定位 fixed 固定，相对于浏览器窗口进行定位121、固定定位的元素跟父亲没有任何关系，只认浏览器2、固定定位完全脱离标准流，不占有位置，不随着滚动条滚动。 叠放次序 z-index当对多个元素同时设置定位时，定位元素之间有可能会发生重叠12341、z-index的默认是0，值越大，越在上面。2、如果值相同，按书写顺序。3、数字没有单位4、只有相对定位、绝对定位、固定定位才有这个属性，其他标准流，浮动，静态定位没有这个属性。 定位模式转换元素添加了绝对定位和固定定位之后，元素模式也会发生转换，都转换为行内块模式。因此，行内元素，添加了绝对定位或者固定定位后浮动后，可以不用转换模式，直接给宽高就好了。 元素的显示和隐藏 display 显示 12display: none; // 隐藏元素（不在保留位置）display: block; // 显示元素 visibility 可见 12visible: 可见hidden: 隐藏 // 保留原位置 overflow 溢出当对象的内容超过其指定高度及宽度时管理内容。 1234visibel: 不剪切内容也不添加滚动条。auto: 超出自动显示滚动条，不超出不显示滚动条。hidden：不显示超过对象尺寸的内容，超出的部分隐藏掉scroll: 不管超出内容，总是显示滚动条。 记录(橙M青P)清除内外边距1234* &#123; margin:0; /* 清除外边距 */ padding:0; /* 清除内边距 */&#125; 外边距合并相邻块元素垂直外边距的合并:当上下相邻的两个块元素相遇时，如果上面的元素有下外边距margin-bottom，下面的元素有上外边距margin-top，则他们之间的垂直间距不是margin-bottom与margin-top之和，而是两者中的较大者。这种现象被称为相邻块元素垂直外边距的合并（也称外边距塌陷）。1解决方案：避免就好！ 嵌套块元素垂直外边距的合并对于两个嵌套关系的块元素，如果父元素没有上内边距及边框，则父元素的上外边距会与子元素的上外边距发生合并，合并后的外边距为两者中的较大者，即使父元素的上外边距为0，也会发生合并。123解决方案：1、可以为父元素定义1px的上边框或上内边距；2、可以为父元素添加 overflow:hidden; 计算盒子大小1231、宽度属性width和高度属性height仅适用于块级元素，对行内元素无效。（img和input除外）2、计算盒子模型的高度时，还应该考虑上下两个盒子垂直外边距合并的情况。3、如果一个盒子没有给定高度、宽度、或集成父亲的高度、宽度，则padding不会影响本盒子的大小。 绝对定位的盒子，水平和垂直居中121、首先left50%父盒子的一半大小2、走自己外边距负的一半值就可以margin-left]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Git丨空文件夹提交]]></title>
     <url>%2F2019%2F04%2F04%2FGit%E4%B8%A8%E7%A9%BA%E6%96%87%E4%BB%B6%E5%A4%B9%E6%8F%90%E4%BA%A4%2F</url>
     <content type="text"><![CDATA[空文件夹提交解决：1find . -type d -empty -exec touch &#123;&#125;/.gitignore \;]]></content>
@@ -211,18 +222,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Roadmap丨JavaWeb Dev in 2019]]></title>
-    <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8JavaWeb%20Dev%20in%202019%2F</url>
-    <content type="text"><![CDATA[JAVA WEB基础原理 Java JDK8 JVM 线程 并发 秒杀 负载 WEB框架 Spring Springboot SpringCloud MyBaits JPA DB MySQL 服务器 Tomcat Nginx 高阶 ELK MQ ZK Netty Dubbo 工具 Maven Git 容器 Docker K8S 大数据 Hadoop HDFS MapReduce Hbase Pig Hive Spark Storm Linux setup mysql nginx tomcat jdk elk docker 基础命令]]></content>
-      <categories>
-        <category>Roadmap</category>
-      </categories>
-      <tags>
-        <tag>Roadmap</tag>
-        <tag>JAVA WEB</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Roadmap丨Web Front-end Dev in 2019]]></title>
     <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8Web%20Front-end%20Dev%20in%202019%2F</url>
     <content type="text"><![CDATA[Web Front-end React react-router redux antd antd-mobile dva umi SSR Next.js After.js Webpack code spliting dll Gulp Web Front-end Containerization docker k8s Vue vue-cli vue-router vuex SSR Nuxt.js ES6/ES7 Web Front-end Security Web Front-end Optimization Nginx GZip Package Managers npm 开发一个NPM模块 yarn CSS Box Model Grid Flex Media Querie CSS Pre-processors Less Sass PostCSS CSS Frameworks BootStrap Basics of TypeScript Basics of JavaScript 闭包 作用域 变量提升 XHR和Ajax发起HTTP请求 第三方模块 moment.js Node.js express koa2 WeChat 小程序 公众号 H5开发 浏览器差异 可视化 ECharts D3.js Canvas SVG WebGL RESTful Git 参考资料1https://github.com/kamranahmedse/developer-roadmap]]></content>
@@ -232,6 +231,18 @@
       <tags>
         <tag>Roadmap</tag>
         <tag>WEB FRONTEND</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Roadmap丨JavaWeb Dev in 2019]]></title>
+    <url>%2F2018%2F03%2F27%2FRoadmap%E4%B8%A8JavaWeb%20Dev%20in%202019%2F</url>
+    <content type="text"><![CDATA[JAVA WEB基础原理 Java JDK8 JVM 线程 并发 秒杀 负载 WEB框架 Spring Springboot SpringCloud MyBaits JPA DB MySQL 服务器 Tomcat Nginx 高阶 ELK MQ ZK Netty Dubbo 工具 Maven Git 容器 Docker K8S 大数据 Hadoop HDFS MapReduce Hbase Pig Hive Spark Storm Linux setup mysql nginx tomcat jdk elk docker 基础命令]]></content>
+      <categories>
+        <category>Roadmap</category>
+      </categories>
+      <tags>
+        <tag>Roadmap</tag>
+        <tag>JAVA WEB</tag>
       </tags>
   </entry>
 </search>
