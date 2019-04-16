@@ -292,6 +292,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/React丨create-react-app配置antd/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="W.x.">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wx's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/01/React丨create-react-app配置antd/" itemprop="url">React丨create-react-app配置antd</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-01T11:35:12+08:00">
+                2019-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add react-app-rewired customize-cra babel-plugin-<span class="keyword">import</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置package-json"><a href="#配置package-json" class="headerlink" title="配置package.json"></a>配置<code>package.json</code></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">-   <span class="string">"start"</span>: <span class="string">"react-scripts start"</span>,</span><br><span class="line">+   <span class="string">"start"</span>: <span class="string">"react-app-rewired start"</span>,</span><br><span class="line">-   <span class="string">"build"</span>: <span class="string">"react-scripts build"</span>,</span><br><span class="line">+   <span class="string">"build"</span>: <span class="string">"react-app-rewired build"</span>,</span><br><span class="line">-   <span class="string">"test"</span>: <span class="string">"react-scripts test"</span>,</span><br><span class="line">+   <span class="string">"test"</span>: <span class="string">"react-app-rewired test"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="修改默认配置"><a href="#修改默认配置" class="headerlink" title="修改默认配置"></a>修改默认配置</h3><p>在项目根目录创建一个 <code>config-overrides.js</code> 用于修改默认配置。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">    override,</span><br><span class="line">    fixBabelImports</span><br><span class="line">  &#125; = <span class="built_in">require</span>(<span class="string">"customize-cra"</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">module</span>.exports = override(</span><br><span class="line">    fixBabelImports(<span class="string">"babel-plugin-import"</span>, &#123;</span><br><span class="line">      libraryName: <span class="string">"antd"</span>,</span><br><span class="line">      style: <span class="string">"css"</span></span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br></pre></td></tr></table></figure></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'antd'</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Button type=<span class="string">"primary"</span>&gt;Primary&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;Button&gt;Default&lt;/</span>Button&gt;</span><br><span class="line">    &lt;Button type=<span class="string">"dashed"</span>&gt;Dashed&lt;<span class="regexp">/Button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;Button type="danger"&gt;Danger&lt;/</span>Button&gt;</span><br><span class="line">  &lt;<span class="regexp">/div&gt;,</span></span><br><span class="line"><span class="regexp">  mountNode</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p><code>babel-plugin-import</code> 是一个用于按需加载组件代码和样式的 babel 插件。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//ant.design/docs/react/use-with-create-react-app-cn</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/Linux丨CentOS6-8安装Nginx1.10/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1709,277 +1856,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/27/Roadmap丨Web Front-end Dev in 2019/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="W.x.">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Wx's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/27/Roadmap丨Web Front-end Dev in 2019/" itemprop="url">Roadmap丨Web Front-end Dev in 2019</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-27T17:02:06+08:00">
-                2018-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Roadmap/" itemprop="url" rel="index">
-                    <span itemprop="name">Roadmap</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Web-Front-end"><a href="#Web-Front-end" class="headerlink" title="Web Front-end"></a>Web Front-end</h3><ul>
-<li><p><code>React</code></p>
-<ul>
-<li><code>react-router</code></li>
-<li><code>redux</code></li>
-<li><code>antd</code></li>
-<li><code>antd-mobile</code></li>
-<li><code>dva</code></li>
-<li><code>umi</code></li>
-<li><code>SSR</code><ul>
-<li><code>Next.js</code></li>
-<li><code>After.js</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>Webpack</code></p>
-<ul>
-<li><code>code spliting</code></li>
-<li><code>dll</code></li>
-</ul>
-</li>
-<li><p><code>Gulp</code></p>
-</li>
-<li><p><code>Web Front-end Containerization</code></p>
-<ul>
-<li><code>docker</code></li>
-<li><code>k8s</code></li>
-</ul>
-</li>
-<li><p><code>Vue</code></p>
-<ul>
-<li><code>vue-cli</code></li>
-<li><code>vue-router</code></li>
-<li><code>vuex</code></li>
-<li><code>SSR</code><ul>
-<li><code>Nuxt.js</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>ES6/ES7</code></p>
-</li>
-<li><p><code>Web Front-end Security</code></p>
-</li>
-<li><p><code>Web Front-end Optimization</code></p>
-</li>
-<li><p><code>Nginx</code></p>
-<ul>
-<li><code>GZip</code></li>
-</ul>
-</li>
-<li><p><code>Package Managers</code></p>
-<ul>
-<li><code>npm</code><ul>
-<li>开发一个NPM模块</li>
-</ul>
-</li>
-<li><code>yarn</code></li>
-</ul>
-</li>
-<li><p><code>CSS</code></p>
-<ul>
-<li><code>Box Model</code></li>
-<li><code>Grid</code></li>
-<li><code>Flex</code></li>
-<li><code>Media Querie</code></li>
-</ul>
-</li>
-<li><p><code>CSS Pre-processors</code></p>
-<ul>
-<li><code>Less</code></li>
-<li><code>Sass</code></li>
-<li><code>PostCSS</code></li>
-</ul>
-</li>
-<li><p><code>CSS Frameworks</code></p>
-<ul>
-<li><code>BootStrap</code></li>
-</ul>
-</li>
-<li><p><code>Basics of TypeScript</code></p>
-</li>
-<li><p><code>Basics of JavaScript</code></p>
-<ul>
-<li>闭包</li>
-<li>作用域</li>
-<li>变量提升</li>
-<li><code>XHR</code>和<code>Ajax</code>发起HTTP请求</li>
-</ul>
-</li>
-<li><p>第三方模块</p>
-<ul>
-<li><code>moment.js</code></li>
-</ul>
-</li>
-<li><p><code>Node.js</code></p>
-<ul>
-<li><code>express</code></li>
-<li><code>koa2</code></li>
-</ul>
-</li>
-<li><p><code>WeChat</code></p>
-<ul>
-<li>小程序</li>
-<li>公众号</li>
-</ul>
-<ul>
-<li><p><code>H5</code>开发</p>
-<ul>
-<li>浏览器差异</li>
-</ul>
-</li>
-<li><p>可视化</p>
-<ul>
-<li><code>ECharts</code></li>
-<li><code>D3.js</code></li>
-<li><code>Canvas</code></li>
-<li><code>SVG</code></li>
-<li><code>WebGL</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>RESTful</code></p>
-</li>
-<li><p><code>Git</code></p>
-</li>
-</ul>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/kamranahmedse/developer-roadmap</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2028,7 +1904,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2039,7 +1915,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -2050,7 +1926,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
